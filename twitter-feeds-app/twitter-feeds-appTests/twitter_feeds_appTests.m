@@ -2,7 +2,7 @@
 //  twitter_feeds_appTests.m
 //  twitter-feeds-appTests
 //
-//  Created by SE on 10/1/13.
+//  Created by Khaled on 10/1/13.
 //  Copyright (c) 2013 khaled. All rights reserved.
 //
 
