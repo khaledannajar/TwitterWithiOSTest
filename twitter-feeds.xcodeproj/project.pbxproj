@@ -41,6 +41,7 @@
 		79E74F7417FCAD9900A91779 /* thai_shrimp_cake.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79E74F6317FCAD9900A91779 /* thai_shrimp_cake.jpg */; };
 		79E74F7517FCAD9900A91779 /* vegetable_curry.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79E74F6417FCAD9900A91779 /* vegetable_curry.jpg */; };
 		79E74F7617FCAD9900A91779 /* white_chocolate_donut.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79E74F6517FCAD9900A91779 /* white_chocolate_donut.jpg */; };
+		79F1AABB17FEC4C9000969BD /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79F1AABA17FEC4C9000969BD /* MainStoryboard_iPad.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,6 +85,7 @@
 		79E74F6317FCAD9900A91779 /* thai_shrimp_cake.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = thai_shrimp_cake.jpg; sourceTree = "<group>"; };
 		79E74F6417FCAD9900A91779 /* vegetable_curry.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = vegetable_curry.jpg; sourceTree = "<group>"; };
 		79E74F6517FCAD9900A91779 /* white_chocolate_donut.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = white_chocolate_donut.jpg; sourceTree = "<group>"; };
+		79F1AABA17FEC4C9000969BD /* MainStoryboard_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = MainStoryboard_iPad.storyboard; path = ../MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +176,7 @@
 			children = (
 				79E74F4B17FCA5FB00A91779 /* TweetCell.xib */,
 				79E74F3117FCA58400A91779 /* MainStoryboard.storyboard */,
+				79F1AABA17FEC4C9000969BD /* MainStoryboard_iPad.storyboard */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -280,6 +283,7 @@
 				79E74F7417FCAD9900A91779 /* thai_shrimp_cake.jpg in Resources */,
 				79E74F7517FCAD9900A91779 /* vegetable_curry.jpg in Resources */,
 				79E74F7617FCAD9900A91779 /* white_chocolate_donut.jpg in Resources */,
+				79F1AABB17FEC4C9000969BD /* MainStoryboard_iPad.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -374,7 +378,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "twitter-feeds/twitter-feeds-Prefix.pch";
 				INFOPLIST_FILE = "twitter-feeds/twitter-feeds-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -385,7 +391,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "twitter-feeds/twitter-feeds-Prefix.pch";
 				INFOPLIST_FILE = "twitter-feeds/twitter-feeds-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

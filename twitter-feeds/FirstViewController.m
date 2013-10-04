@@ -25,6 +25,10 @@
     
     recipeImages = [NSArray arrayWithObjects:@"angry_birds_cake.jpg", @"creme_brelee.jpg", @"egg_benedict.jpg", @"full_breakfast.jpg", @"green_tea.jpg", @"ham_and_cheese_panini.jpg", @"ham_and_egg_sandwich.jpg", @"hamburger.jpg", @"instant_noodle_with_egg.jpg", @"japanese_noodle_with_pork.jpg", @"mushroom_risotto.jpg", @"noodle_with_bbq_pork.jpg", @"starbucks_coffee.jpg", @"thai_shrimp_cake.jpg", @"vegetable_curry.jpg", @"white_chocolate_donut.jpg", nil];
 
+    UINib* nib = [UINib nibWithNibName:@"TweetCell" bundle:nil];
+    [self.collectionView registerNib:nib forCellWithReuseIdentifier:@"Cell"];
+    
+    
 }
 
 
@@ -35,7 +39,9 @@
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
         NSLog(@"sizeForItemAtIndexPath");
-    return CGSizeMake(100, 100);
+//    NSString* string;
+//    [string sizeWithFont:[UIFont systemFontOfSize:15] forWidth:50 lineBreakMode:NSLineBreakByWordWrapping];
+    return CGSizeMake(200, 200);
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
