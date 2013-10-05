@@ -51,7 +51,7 @@
     
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
     
-    UIImageView *recipeImageView = (UIImageView *)[cell viewWithTag:100];
+    UIImageView *recipeImageView = (UIImageView *)[cell viewWithTag:2];
     recipeImageView.image = [UIImage imageNamed:[recipeImages objectAtIndex:indexPath.row]];
     
     return cell;

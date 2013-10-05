@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7971712817FF126E00023B31 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7971712717FF126E00023B31 /* Social.framework */; };
 		79E74F1A17FCA58400A91779 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79E74F1917FCA58400A91779 /* UIKit.framework */; };
 		79E74F1C17FCA58400A91779 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79E74F1B17FCA58400A91779 /* Foundation.framework */; };
 		79E74F1E17FCA58400A91779 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79E74F1D17FCA58400A91779 /* CoreGraphics.framework */; };
@@ -42,9 +43,11 @@
 		79E74F7517FCAD9900A91779 /* vegetable_curry.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79E74F6417FCAD9900A91779 /* vegetable_curry.jpg */; };
 		79E74F7617FCAD9900A91779 /* white_chocolate_donut.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79E74F6517FCAD9900A91779 /* white_chocolate_donut.jpg */; };
 		79F1AABB17FEC4C9000969BD /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79F1AABA17FEC4C9000969BD /* MainStoryboard_iPad.storyboard */; };
+		79F95DBD17FFFFAE0001617D /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79F95DBC17FFFFAE0001617D /* Accounts.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7971712717FF126E00023B31 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		79E74F1517FCA58400A91779 /* twitter-feeds.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "twitter-feeds.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		79E74F1917FCA58400A91779 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		79E74F1B17FCA58400A91779 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -86,6 +89,7 @@
 		79E74F6417FCAD9900A91779 /* vegetable_curry.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = vegetable_curry.jpg; sourceTree = "<group>"; };
 		79E74F6517FCAD9900A91779 /* white_chocolate_donut.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = white_chocolate_donut.jpg; sourceTree = "<group>"; };
 		79F1AABA17FEC4C9000969BD /* MainStoryboard_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = MainStoryboard_iPad.storyboard; path = ../MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
+		79F95DBC17FFFFAE0001617D /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +97,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79F95DBD17FFFFAE0001617D /* Accounts.framework in Frameworks */,
+				7971712817FF126E00023B31 /* Social.framework in Frameworks */,
 				79E74F1A17FCA58400A91779 /* UIKit.framework in Frameworks */,
 				79E74F1C17FCA58400A91779 /* Foundation.framework in Frameworks */,
 				79E74F1E17FCA58400A91779 /* CoreGraphics.framework in Frameworks */,
@@ -122,6 +128,8 @@
 		79E74F1817FCA58400A91779 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				79F95DBC17FFFFAE0001617D /* Accounts.framework */,
+				7971712717FF126E00023B31 /* Social.framework */,
 				79E74F1917FCA58400A91779 /* UIKit.framework */,
 				79E74F1B17FCA58400A91779 /* Foundation.framework */,
 				79E74F1D17FCA58400A91779 /* CoreGraphics.framework */,
