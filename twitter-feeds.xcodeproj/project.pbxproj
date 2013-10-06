@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		792604B118006A2900CEE41E /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 792604B018006A2900CEE41E /* Twitter.framework */; };
+		792604B418014F4400CEE41E /* places_pin_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 792604B318014F4400CEE41E /* places_pin_icon.png */; };
+		792604B718014F8500CEE41E /* retweet_hover.png in Resources */ = {isa = PBXBuildFile; fileRef = 792604B518014F8500CEE41E /* retweet_hover.png */; };
+		792604B818014F8500CEE41E /* retweet.png in Resources */ = {isa = PBXBuildFile; fileRef = 792604B618014F8500CEE41E /* retweet.png */; };
 		7971712817FF126E00023B31 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7971712717FF126E00023B31 /* Social.framework */; };
 		79E74F1A17FCA58400A91779 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79E74F1917FCA58400A91779 /* UIKit.framework */; };
 		79E74F1C17FCA58400A91779 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79E74F1B17FCA58400A91779 /* Foundation.framework */; };
@@ -47,6 +51,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		792604B018006A2900CEE41E /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
+		792604B318014F4400CEE41E /* places_pin_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = places_pin_icon.png; sourceTree = "<group>"; };
+		792604B518014F8500CEE41E /* retweet_hover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = retweet_hover.png; sourceTree = "<group>"; };
+		792604B618014F8500CEE41E /* retweet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = retweet.png; sourceTree = "<group>"; };
 		7971712717FF126E00023B31 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		79E74F1517FCA58400A91779 /* twitter-feeds.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "twitter-feeds.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		79E74F1917FCA58400A91779 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -97,6 +105,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				792604B118006A2900CEE41E /* Twitter.framework in Frameworks */,
 				79F95DBD17FFFFAE0001617D /* Accounts.framework in Frameworks */,
 				7971712817FF126E00023B31 /* Social.framework in Frameworks */,
 				79E74F1A17FCA58400A91779 /* UIKit.framework in Frameworks */,
@@ -111,6 +120,7 @@
 		79E74F0A17FCA58400A91779 = {
 			isa = PBXGroup;
 			children = (
+				792604B018006A2900CEE41E /* Twitter.framework */,
 				79E74F1F17FCA58400A91779 /* twitter-feeds */,
 				79E74F1817FCA58400A91779 /* Frameworks */,
 				79E74F1617FCA58400A91779 /* Products */,
@@ -140,6 +150,7 @@
 		79E74F1F17FCA58400A91779 /* twitter-feeds */ = {
 			isa = PBXGroup;
 			children = (
+				79F95DBF18003EFF0001617D /* dto */,
 				79E74F4E17FCA63300A91779 /* views */,
 				79E74F3417FCA58400A91779 /* FirstViewController.h */,
 				79E74F3517FCA58400A91779 /* FirstViewController.m */,
@@ -170,6 +181,9 @@
 		79E74F4D17FCA60F00A91779 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				792604B518014F8500CEE41E /* retweet_hover.png */,
+				792604B618014F8500CEE41E /* retweet.png */,
+				792604B318014F4400CEE41E /* places_pin_icon.png */,
 				79E74F5317FCAD8B00A91779 /* tmp */,
 				79E74F3717FCA58400A91779 /* first.png */,
 				79E74F3917FCA58400A91779 /* first@2x.png */,
@@ -211,6 +225,13 @@
 				79E74F6517FCAD9900A91779 /* white_chocolate_donut.jpg */,
 			);
 			name = tmp;
+			sourceTree = "<group>";
+		};
+		79F95DBF18003EFF0001617D /* dto */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = dto;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -292,6 +313,9 @@
 				79E74F7517FCAD9900A91779 /* vegetable_curry.jpg in Resources */,
 				79E74F7617FCAD9900A91779 /* white_chocolate_donut.jpg in Resources */,
 				79F1AABB17FEC4C9000969BD /* MainStoryboard_iPad.storyboard in Resources */,
+				792604B418014F4400CEE41E /* places_pin_icon.png in Resources */,
+				792604B718014F8500CEE41E /* retweet_hover.png in Resources */,
+				792604B818014F8500CEE41E /* retweet.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
