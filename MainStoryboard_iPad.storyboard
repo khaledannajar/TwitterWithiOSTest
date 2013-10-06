@@ -1,9 +1,150 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2519" systemVersion="12A206j" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2840" systemVersion="11G63" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="UAa-h0-gr3">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1856"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1926"/>
     </dependencies>
-    <scenes/>
+    <scenes>
+        <!--First View Controller - First-->
+        <scene sceneID="nK8-so-1eC">
+            <objects>
+                <viewController title="First" id="Myk-3b-Qhz" customClass="FirstViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zvo-N4-CrJ">
+                        <rect key="frame" x="0.0" y="20" width="768" height="955"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" barStyle="blackOpaque" translatesAutoresizingMaskIntoConstraints="NO" id="6b5-tB-dT3">
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Myk-3b-Qhz" id="7om-jU-6XR"/>
+                                </connections>
+                            </searchBar>
+                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" indicatorStyle="white" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="KOc-P2-QgH">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="DeG-29-8cR">
+                                    <size key="itemSize" width="100" height="100"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="6b5-tB-dT3" firstAttribute="trailing" secondItem="zvo-N4-CrJ" secondAttribute="trailing" type="default" id="IF7-mr-bHO"/>
+                            <constraint firstItem="6b5-tB-dT3" firstAttribute="leading" secondItem="zvo-N4-CrJ" secondAttribute="leading" type="default" id="KNx-S8-Zbt"/>
+                            <constraint firstItem="KOc-P2-QgH" firstAttribute="leading" secondItem="zvo-N4-CrJ" secondAttribute="leading" type="default" id="XMV-Xx-B3q"/>
+                            <constraint firstItem="KOc-P2-QgH" firstAttribute="top" secondItem="6b5-tB-dT3" secondAttribute="bottom" type="default" id="b98-XO-0Tv"/>
+                            <constraint firstItem="KOc-P2-QgH" firstAttribute="bottom" secondItem="zvo-N4-CrJ" secondAttribute="bottom" type="default" id="dID-Y7-IuP"/>
+                            <constraint firstItem="KOc-P2-QgH" firstAttribute="trailing" secondItem="zvo-N4-CrJ" secondAttribute="trailing" type="default" id="oCi-n2-j6p"/>
+                            <constraint firstItem="6b5-tB-dT3" firstAttribute="top" secondItem="zvo-N4-CrJ" secondAttribute="top" type="user" id="rQg-sQ-f0E"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="First" image="first" id="64Z-cG-wgt"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
+                    <connections>
+                        <outlet property="collectionView" destination="KOc-P2-QgH" id="1ej-0m-dnJ"/>
+                        <outlet property="searchBar" destination="6b5-tB-dT3" id="cIh-88-Orz"/>
+                        <outlet property="searchDisplayController" destination="LhG-PT-cqN" id="niN-k7-ema"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5cM-Nc-RRP" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="LhG-PT-cqN">
+                    <connections>
+                        <outlet property="delegate" destination="Myk-3b-Qhz" id="uWT-zQ-DWB"/>
+                        <outlet property="searchBar" destination="6b5-tB-dT3" id="oZ9-Iu-zWT"/>
+                        <outlet property="searchContentsController" destination="Myk-3b-Qhz" id="VdA-O8-KVP"/>
+                        <outlet property="searchResultsDataSource" destination="Myk-3b-Qhz" id="ozu-pM-On0"/>
+                        <outlet property="searchResultsDelegate" destination="Myk-3b-Qhz" id="1Yh-do-X7N"/>
+                    </connections>
+                </searchDisplayController>
+            </objects>
+            <point key="canvasLocation" x="-171" y="-616"/>
+        </scene>
+        <!--Second View Controller - Second-->
+        <scene sceneID="8Fa-N8-PwT">
+            <objects>
+                <viewController title="Second" id="NTh-ko-2ot" customClass="SecondViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Zsy-8v-8el">
+                        <rect key="frame" x="0.0" y="20" width="768" height="955"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Second View" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="d6V-Wz-pXZ">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="36"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" bouncesZoom="NO" editable="NO" text="Loaded by the second view controller — an instance of SecondViewController — specified in the app delegate." textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Vzu-UE-TSZ">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="88" id="XCO-ha-dDT"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" size="system"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Vzu-UE-TSZ" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="63k-P5-EBN"/>
+                            <constraint firstAttribute="centerY" secondItem="Vzu-UE-TSZ" secondAttribute="centerY" type="user" id="BV1-wH-RYL"/>
+                            <constraint firstItem="Vzu-UE-TSZ" firstAttribute="top" secondItem="d6V-Wz-pXZ" secondAttribute="bottom" constant="40" type="user" id="C7Q-31-03h"/>
+                            <constraint firstAttribute="trailing" secondItem="d6V-Wz-pXZ" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="LuP-9j-DhE"/>
+                            <constraint firstItem="Vzu-UE-TSZ" firstAttribute="leading" secondItem="Zsy-8v-8el" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="e7H-0F-ZoI"/>
+                            <constraint firstItem="d6V-Wz-pXZ" firstAttribute="leading" secondItem="Zsy-8v-8el" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="uB4-Sx-1hW"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Second" image="second" id="0wT-Dl-4wA"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BDd-qn-smH" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-129" y="750"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="sFE-nI-bKU">
+            <objects>
+                <tabBarController id="UAa-h0-gr3" sceneMemberID="viewController">
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="nCw-ga-Lhm">
+                        <rect key="frame" x="0.0" y="431" width="320" height="49"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="Myk-3b-Qhz" kind="relationship" relationship="viewControllers" id="FOu-n6-7CA"/>
+                        <segue destination="NTh-ko-2ot" kind="relationship" relationship="viewControllers" id="GGp-CG-2gt"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9U1-r8-viE" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1288" y="36"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="first" width="16" height="16"/>
+        <image name="second" width="16" height="16"/>
+    </resources>
+    <classes>
+        <class className="FirstViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FirstViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="collectionView" candidateClass="UICollectionView"/>
+                <relationship kind="outlet" name="searchBar" candidateClass="UISearchBar"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="SecondViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SecondViewController.h"/>
+        </class>
+        <class className="UICollectionViewFlowLayout" superclassName="UICollectionViewLayout">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewFlowLayout.h"/>
+        </class>
+        <class className="UICollectionViewLayout" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewLayout.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
