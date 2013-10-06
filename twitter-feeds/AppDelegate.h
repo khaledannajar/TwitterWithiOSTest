@@ -7,9 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Accounts/Accounts.h>
+
+#define AccountTwitterAccountAccessGranted @"TwitterAccountAccessGranted"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (nonatomic, retain) ACAccount* twitterAccount;
 
 @end
