@@ -6,6 +6,9 @@
 //  Copyright (c) 2013 ALWANS. All rights reserved.
 //
 
+// check this one TODO:
+//https://github.com/episod/twitter-api-fields-as-crowdsourced/wiki/Status-Tweet-fields
+
 #import "FirstViewController.h"
 #import <Twitter/Twitter.h>
 #import "AppDelegate.h"
