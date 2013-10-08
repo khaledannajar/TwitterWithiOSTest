@@ -32,8 +32,9 @@ NSArray *tweetsArray;
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    NSLog(@"viewWillAppear");
     [super viewWillAppear:animated];
-//    AppDelegate *appDelegate = [self.sharedApplication delegate];
+    [self.collectionView reloadData];
     
     if (appDelegate.twitterAccount)
     {
@@ -69,7 +70,6 @@ NSArray *tweetsArray;
 
     if (appDelegate.twitterAccount)
     {
-
         [self getFeed];
     }else
     {
@@ -97,25 +97,12 @@ NSArray *tweetsArray;
     // Create an NSDictionary for the twitter request parameters. We specify we want to get 30 tweets though this can be changed to what you like
     NSDictionary *parameters = @{@"count" : @"30"};
     // Create a new TWRequest, use the GET request method, pass in our parameters and the URL
-    TWRequest *twitterFeed = [[TWRequest alloc] initWithURL:feedURL
-                                                 parameters:parameters
-                                              requestMethod:TWRequestMethodGET];
-    
-//    NSDictionary *parameters = @{@"count" : @"30"};
-//    // Create a new TWRequest, use the GET request method, pass in our parameters and the URL
-////    TWRequest *twitterFeed = [[TWRequest alloc] initWithURL:feedURL
-////                                                 parameters:parameters
-////                                              requestMethod:TWRequestMethodGET];
-//
-//    
-//    SLRequest *aRequest  = [SLRequest requestForServiceType:SLServiceTypeTwitter
-//                                              requestMethod:SLRequestMethodPOST
-//                                                        URL:feedURL
-//                                                 parameters:parameters];
+    SLRequest *twitterFeed  = [SLRequest requestForServiceType:SLServiceTypeTwitter
+                                              requestMethod:TWRequestMethodGET
+                                                        URL:feedURL
+                                                 parameters:parameters];
     
     
-    // Get the shared instance of the app delegate
-    AppDelegate *appDelegate = [self.sharedApplication delegate];
     // Set the twitter request's user account to the one we downloaded inside our app delegate
     twitterFeed.account = appDelegate.twitterAccount;
     // Enable the network activity indicator to inform the user we're downloading tweets
@@ -166,7 +153,7 @@ NSArray *tweetsArray;
                     NSLog(@"updateFeed, feedData = nill");
 //    NSLog(@"tweetsArray = %@", tweetsArray);
 //        NSLog(@"feedData = %@", feedData);
-    [self.collectionView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO modes:[NSArray arrayWithObject:[NSRunLoop mainRunLoop]]];
+    [self.collectionView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
             NSLog(@"numberOfItemsInSection %d", self.tweetsArray.count);

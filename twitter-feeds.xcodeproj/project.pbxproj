@@ -120,6 +120,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7952E0581804959B0007FEB3 /* wsCaller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = wsCaller;
+			sourceTree = "<group>";
+		};
 		79E74F0A17FCA58400A91779 = {
 			isa = PBXGroup;
 			children = (
@@ -153,6 +160,7 @@
 		79E74F1F17FCA58400A91779 /* twitter-feeds */ = {
 			isa = PBXGroup;
 			children = (
+				7952E0581804959B0007FEB3 /* wsCaller */,
 				79F95DBF18003EFF0001617D /* dto */,
 				79E74F4E17FCA63300A91779 /* views */,
 				79E74F3417FCA58400A91779 /* FirstViewController.h */,
