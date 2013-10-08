@@ -15,5 +15,9 @@
 
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic, retain) ACAccount* twitterAccount;
+@property (nonatomic, retain) NSObject* target;
+@property (nonatomic) SEL selector;
+
+- (void)getTwitterAccount;
 
 @end
