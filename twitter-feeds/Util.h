@@ -12,4 +12,7 @@
 
 +( BOOL) isEmpty:(id) thing;
 
++(NSString*) formatDateString:(NSString*) input;
+
+
 @end

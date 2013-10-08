@@ -12,42 +12,26 @@
 #import "FirstViewController.h"
 #import <Twitter/Twitter.h>
 #import "AppDelegate.h"
+#import "Util.h"
 
-#define TWITTER_BASE_URL (@"https://api.twitter.com/1.1/search/tweets.json")
+#define TWITTER_BASE_URL ([NSURL URLWithString:@"https://api.twitter.com/1.1/search/tweets.json"])
 
 
 @interface FirstViewController ()
 {
     NSArray *recipeImages;
-NSArray *tweetsArray;
     AppDelegate *appDelegate;
 
 }
-    @property (strong, nonatomic) NSArray *tweetsArray;
+    @property (strong, nonatomic) NSDictionary *tweetsDic;
     @property (nonatomic, retain) UIApplication *sharedApplication;
+    @property (nonatomic, retain) NSString* searchToken;
+    @property (nonatomic, retain) NSArray* statuses;
+
 @end
 
 @implementation FirstViewController
-@synthesize tweetsArray;
 
--(void)viewWillAppear:(BOOL)animated
-{
-    NSLog(@"viewWillAppear");
-    [super viewWillAppear:animated];
-    [self.collectionView reloadData];
-    
-    if (appDelegate.twitterAccount)
-    {
-        [self getFeed];
-    }else
-    {
-        //        appDelegate.target = self;
-        //        appDelegate.selector = @selector(getFeed);
-        //        [appDelegate getTwitterAccount];
-        NSLog(@"firstViewController Account nil");
-    }
-
-}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -58,27 +42,8 @@ NSArray *tweetsArray;
     self.searchBar = [[UISearchBar alloc]init];
 
     self.sharedApplication = [UIApplication sharedApplication];
-    self.sharedApplication.networkActivityIndicatorVisible = YES;
-    
-//    TODO: show loading view
-//    call service
-//    https://api.twitter.com/1.1/search/tweets.json?q=%23freebandnames&since_id=24012619984051000&max_id=250126199840518145&result_type=mixed&count=4
-//    convert json to object
-//    hide loading view
     
     appDelegate = [self.sharedApplication delegate];
-
-    if (appDelegate.twitterAccount)
-    {
-        [self getFeed];
-    }else
-    {
-////        appDelegate.target = self;
-////        appDelegate.selector = @selector(getFeed);
-////        [appDelegate getTwitterAccount];
-        NSLog(@"firstViewController Account nil");
-        self.sharedApplication.networkActivityIndicatorVisible = NO;
-    }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getFeed) name:@"TwitterAccountAcquiredNotification" object:nil];
     
@@ -89,101 +54,45 @@ NSArray *tweetsArray;
     
 }
 
-- (void)getFeed
+- (void)didReceiveMemoryWarning
 {
-    NSLog(@"getFeed ::: called");
-    NSURL *feedURL = [NSURL URLWithString:@"http://api.twitter.com/1/statuses/home_timeline.json"];
-    // Create an NSDictionary for the twitter request parameters. We specify we want to get 30 tweets though this can be changed to what you like
-    NSDictionary *parameters = @{@"count" : @"30"};
-    // Create a new TWRequest, use the GET request method, pass in our parameters and the URL
-    SLRequest *twitterFeed  = [SLRequest requestForServiceType:SLServiceTypeTwitter
-                                              requestMethod:TWRequestMethodGET
-                                                        URL:feedURL
-                                                 parameters:parameters];
-    
-    
-    // Set the twitter request's user account to the one we downloaded inside our app delegate
-    twitterFeed.account = appDelegate.twitterAccount;
-    // Enable the network activity indicator to inform the user we're downloading tweets
-    self.sharedApplication.networkActivityIndicatorVisible = YES;
-    // Perform the twitter request
-    [twitterFeed performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
-        if (!error) {
-            // If no errors were found then parse the JSON into a foundation object
-            NSError *jsonError = nil;
-            id feedData = [NSJSONSerialization
-                           JSONObjectWithData:responseData options:0
-                           error:&jsonError];
-            if (!jsonError)
-            {
-                // If no errors were found during the JSON parsing our feed table
-                NSLog(@"! jsonError");
-                [self updateFeed:feedData]; }
-            else
-            {
-                // In case we had an error parsing JSON then show alert view with the error's description
-//                ￼￼￼￼￼￼￼￼￼￼￼￼then update
-//                the user an
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                                                         message:[jsonError localizedDescription] delegate:nil
-                                                                               cancelButtonTitle:@"OK"
-                                                                               otherButtonTitles:nil];
-                [alertView show];
-            } }
-        else
-        {
-//            successfuly description
-            // In case we couldn't perform the twitter request then show the user an alert view with the error's
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                                         message:[error localizedDescription] delegate:nil
-                                                               cancelButtonTitle:@"OK"
-                                                               otherButtonTitles:nil]; [alertView show];
-        }
-        // Stop the network activity indicator since we're done downloading data
-        self.sharedApplication.networkActivityIndicatorVisible = NO; }];
+    [super didReceiveMemoryWarning];
+    //    TOTO: remove images from cache dictionary
 }
 
-- (void)updateFeed:(id)feedData {
-    // We receive the NSArray of tweets and store it in our local tweets array
-    self.tweetsArray = (NSArray *)feedData;
-    if(feedData)
-                    NSLog(@"updateFeed, feedData != nill");
-    else
-                    NSLog(@"updateFeed, feedData = nill");
-//    NSLog(@"tweetsArray = %@", tweetsArray);
-//        NSLog(@"feedData = %@", feedData);
-    [self.collectionView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
-}
+#pragma  - mark data source methods
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-            NSLog(@"numberOfItemsInSection %d", self.tweetsArray.count);
-//    return recipeImages.count;
-    return self.tweetsArray.count;
+
+    if (self.statuses) {
+        NSLog(@"statuses count %d", self.statuses.count);
+        return self.statuses.count;
+    } else
+    {
+        return 0;
+    }
 }
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
 //        NSLog(@"sizeForItemAtIndexPath");
 //    NSString* string;
 //    [string sizeWithFont:[UIFont systemFontOfSize:15] forWidth:50 lineBreakMode:NSLineBreakByWordWrapping];
-    return CGSizeMake(250, 200);
+    
+    return CGSizeMake(225, 200);
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *identifier = @"Cell";
     
-//    NSLog(@"cellForItemAtIndexPath");
-    
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
-    
-//    UIImageView *recipeImageView = (UIImageView *)[cell viewWithTag:2];
-//    recipeImageView.image = [UIImage imageNamed:[recipeImages objectAtIndex:indexPath.row]];
 
     UIImageView *retweetedImageView = (UIImageView *)[cell viewWithTag:1];
-    [retweetedImageView setHidden:true];
+
     UIImageView *profileImageView = (UIImageView *)[cell viewWithTag:2];
     [profileImageView setHidden:true];
 
     UIImageView *placesImageView = (UIImageView *)[cell viewWithTag:3];
-    [placesImageView setHidden:true];
+
 
     UITextView* tweeterNameTxtView = (UITextView*) [cell viewWithTag:4];
         UITextView* tweetedTxtView = (UITextView*) [cell viewWithTag:5];
@@ -198,29 +107,40 @@ NSArray *tweetsArray;
 //    date 6
 //    save 7
     
-    NSDictionary* oneTweet = [self.tweetsArray objectAtIndex:indexPath.row];
+    NSDictionary* oneTweet = [self.statuses objectAtIndex:indexPath.row];
     NSDictionary* user = [oneTweet objectForKey:@"user"];
     
     NSString* tweeteeName = [user objectForKey:@"name"];
-    NSString* createdAt =     [oneTweet objectForKey:@"created_at"];
+    NSString* createdAt = [Util formatDateString:[oneTweet objectForKey:@"created_at"]];
     NSString* tweetText = [oneTweet objectForKey:@"text"];
     NSString* profileImage = [oneTweet objectForKey:@"profile_image_url"];
     NSString* retweetCount = [oneTweet objectForKey:@"retweet_count"];
-
-    NSLog(@"tweeteeName = %@",tweeteeName);
-    NSLog(@"createdAt = %@",createdAt);
-    NSLog(@"tweetText = %@",tweetText);
-    NSLog(@"profileImage = %@",profileImage);
-    NSLog(@"retweetCount = %@",retweetCount);
+    NSArray* coordinates = [oneTweet objectForKey:@"coordinates"];
     
+    NSLog(@"name = %@ createdAt %@, tweetText %@, retweetCount %@, profileImage %@, coordinates %@", tweeteeName, createdAt, tweetText, retweetCount, profileImage, coordinates);
+    
+    
+    tweeterNameTxtView.text = tweeteeName;
+    tweetedTxtView.text = tweetText;
+    tweeterDateTxtView.text = createdAt;
+    //TODO: CHANGE this check it is not working : check for kcfnull
+    if (![@"0" isEqualToString:retweetCount]) {
+        [retweetedImageView setHidden:NO];
+    }else{
+        [retweetedImageView setHidden:true];
+    }
+
+    if ([Util isEmpty:coordinates]) {
+        [placesImageView setHidden:NO];
+    }else{
+        [placesImageView setHidden:YES];
+    }
+    
+    [saveButton addTarget:self action:@selector(saveButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     
     return cell;
 }
-
-
-
-
 
 # pragma - mark search bar
 
@@ -253,6 +173,8 @@ NSArray *tweetsArray;
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 // called when keyboard search button pressed
 {
+    self.searchToken = [searchBar.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        [searchBar resignFirstResponder];
         NSLog(@"searchBarSearchButtonClicked");
     if (appDelegate.twitterAccount)
     {
@@ -270,15 +192,98 @@ NSArray *tweetsArray;
 - (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar
 // called when cancel button pressed
 {
-        NSLog(@"searchBarCancelButtonClicked");     
+        NSLog(@"searchBarCancelButtonClicked");
+    [searchBar resignFirstResponder];
+}
+
+#pragma - mark save button methods
+
+-(void) saveButtonClicked:(UIButton *)button
+{
+
+    CGPoint location = [button.superview convertPoint:button.center toView:self.collectionView];
+    NSIndexPath *indexPath = [self.collectionView indexPathForItemAtPoint:location];
+
+    if (indexPath) {
+        NSLog(@"saveButton indexPath is %@", indexPath);
+    [self.statuses objectAtIndex:indexPath.row];
+        //    TODO: save tweet to core data
+        
+    }else{
+        NSLog(@"saveButton indexPath is nil");
+    }
 }
 
 
-- (void)didReceiveMemoryWarning
+#pragma - mark call service
+
+- (void)getFeed
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-//    TOTO: remove images from cache dictionary
+    NSLog(@"getFeed ::: called");
+    
+    // Create an NSDictionary for the twitter request parameters. We specify we want to get 30 tweets though this can be changed to what you like
+    NSDictionary *parameters =
+    @{@"q" : self.searchToken,
+    @"count" : @"30"};
+    
+    // Create a new TWRequest, use the GET request method, pass in our parameters and the URL
+    SLRequest *twitterFeed  = [SLRequest requestForServiceType:SLServiceTypeTwitter
+                                                 requestMethod:TWRequestMethodGET
+                                                           URL:TWITTER_BASE_URL
+                                                    parameters:parameters];
+    
+    
+    // Set the twitter request's user account to the one we downloaded inside our app delegate
+    twitterFeed.account = appDelegate.twitterAccount;
+    // Enable the network activity indicator to inform the user we're downloading tweets
+    self.sharedApplication.networkActivityIndicatorVisible = YES;
+    // Perform the twitter request
+    [twitterFeed performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+        if (!error) {
+            // If no errors were found then parse the JSON into a foundation object
+            NSError *jsonError = nil;
+            id feedData = [NSJSONSerialization
+                           JSONObjectWithData:responseData options:0
+                           error:&jsonError];
+            if (!jsonError)
+            {
+                // If no errors were found during the JSON parsing our feed table
+                NSLog(@"! jsonError");
+                [self updateFeed:feedData]; }
+            else
+            {
+                // In case we had an error parsing JSON then show alert view with the error's description
+                //                ￼￼￼￼￼￼￼￼￼￼￼￼then update
+                //                the user an
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                                    message:[jsonError localizedDescription] delegate:nil
+                                                          cancelButtonTitle:@"OK"
+                                                          otherButtonTitles:nil];
+                [alertView show];
+            } }
+        else
+        {
+            //            successfuly description
+            // In case we couldn't perform the twitter request then show the user an alert view with the error's
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                                message:[error localizedDescription] delegate:nil
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles:nil]; [alertView show];
+        }
+        // Stop the network activity indicator since we're done downloading data
+        self.sharedApplication.networkActivityIndicatorVisible = NO; }];
+}
+
+- (void)updateFeed:(id)feedData {
+    if(feedData)
+        NSLog(@"updateFeed, feedData != nill");
+    else
+        NSLog(@"updateFeed, feedData = nill");
+    self.tweetsDic = nil;
+    self.tweetsDic = (NSDictionary *)feedData;
+    self.statuses = [self.tweetsDic objectForKey:@"statuses"];
+
+    [self.collectionView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
 }
 
 @end
