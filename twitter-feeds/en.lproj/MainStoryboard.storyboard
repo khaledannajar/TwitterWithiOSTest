@@ -25,7 +25,7 @@
                                 </collectionViewFlowLayout>
                                 <cells/>
                             </collectionView>
-                            <searchBar contentMode="redraw" barStyle="blackOpaque" translatesAutoresizingMaskIntoConstraints="NO" id="mUm-Q9-zhF">
+                            <searchBar contentMode="redraw" barStyle="blackOpaque" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mUm-Q9-zhF">
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="delegate" destination="2" id="pPM-dh-Nyd"/>
