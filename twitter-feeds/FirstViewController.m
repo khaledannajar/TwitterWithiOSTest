@@ -20,6 +20,8 @@
 {
     NSArray *recipeImages;
 NSArray *tweetsArray;
+    AppDelegate *appDelegate;
+
 }
     @property (strong, nonatomic) NSArray *tweetsArray;
     @property (nonatomic, retain) UIApplication *sharedApplication;
@@ -28,6 +30,23 @@ NSArray *tweetsArray;
 @implementation FirstViewController
 @synthesize tweetsArray;
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+//    AppDelegate *appDelegate = [self.sharedApplication delegate];
+    
+    if (appDelegate.twitterAccount)
+    {
+        [self getFeed];
+    }else
+    {
+        //        appDelegate.target = self;
+        //        appDelegate.selector = @selector(getFeed);
+        //        [appDelegate getTwitterAccount];
+        NSLog(@"firstViewController Account nil");
+    }
+
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -46,15 +65,19 @@ NSArray *tweetsArray;
 //    convert json to object
 //    hide loading view
     
-    AppDelegate *appDelegate = [[UIApplication sharedApplication]
-                                delegate];
+    appDelegate = [self.sharedApplication delegate];
+
     if (appDelegate.twitterAccount)
     {
 
         [self getFeed];
     }else
     {
-        NSLog(@"firstViewController tiwtter Account nil");
+////        appDelegate.target = self;
+////        appDelegate.selector = @selector(getFeed);
+////        [appDelegate getTwitterAccount];
+        NSLog(@"firstViewController Account nil");
+        self.sharedApplication.networkActivityIndicatorVisible = NO;
     }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getFeed) name:@"TwitterAccountAcquiredNotification" object:nil];
@@ -77,13 +100,26 @@ NSArray *tweetsArray;
     TWRequest *twitterFeed = [[TWRequest alloc] initWithURL:feedURL
                                                  parameters:parameters
                                               requestMethod:TWRequestMethodGET];
+    
+//    NSDictionary *parameters = @{@"count" : @"30"};
+//    // Create a new TWRequest, use the GET request method, pass in our parameters and the URL
+////    TWRequest *twitterFeed = [[TWRequest alloc] initWithURL:feedURL
+////                                                 parameters:parameters
+////                                              requestMethod:TWRequestMethodGET];
+//
+//    
+//    SLRequest *aRequest  = [SLRequest requestForServiceType:SLServiceTypeTwitter
+//                                              requestMethod:SLRequestMethodPOST
+//                                                        URL:feedURL
+//                                                 parameters:parameters];
+    
+    
     // Get the shared instance of the app delegate
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate = [self.sharedApplication delegate];
     // Set the twitter request's user account to the one we downloaded inside our app delegate
     twitterFeed.account = appDelegate.twitterAccount;
     // Enable the network activity indicator to inform the user we're downloading tweets
-    UIApplication *sharedApplication = [UIApplication sharedApplication];
-    sharedApplication.networkActivityIndicatorVisible = YES;
+    self.sharedApplication.networkActivityIndicatorVisible = YES;
     // Perform the twitter request
     [twitterFeed performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (!error) {
@@ -95,6 +131,7 @@ NSArray *tweetsArray;
             if (!jsonError)
             {
                 // If no errors were found during the JSON parsing our feed table
+                NSLog(@"! jsonError");
                 [self updateFeed:feedData]; }
             else
             {
@@ -117,15 +154,19 @@ NSArray *tweetsArray;
                                                                otherButtonTitles:nil]; [alertView show];
         }
         // Stop the network activity indicator since we're done downloading data
-        sharedApplication.networkActivityIndicatorVisible = NO; }];
+        self.sharedApplication.networkActivityIndicatorVisible = NO; }];
 }
 
 - (void)updateFeed:(id)feedData {
     // We receive the NSArray of tweets and store it in our local tweets array
     self.tweetsArray = (NSArray *)feedData;
+    if(feedData)
+                    NSLog(@"updateFeed, feedData != nill");
+    else
+                    NSLog(@"updateFeed, feedData = nill");
 //    NSLog(@"tweetsArray = %@", tweetsArray);
 //        NSLog(@"feedData = %@", feedData);
-    [self.collectionView reloadData];
+    [self.collectionView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO modes:[NSArray arrayWithObject:[NSRunLoop mainRunLoop]]];
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
             NSLog(@"numberOfItemsInSection %d", self.tweetsArray.count);
@@ -195,6 +236,56 @@ NSArray *tweetsArray;
 
 
 
+# pragma - mark search bar
+
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
+// return NO to not become first responder
+{
+    return YES;
+}
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar;
+// called when text starts editing
+{
+    NSLog(@"searchBarTextDidBeginEditing");
+}
+- (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar;
+// return NO to not resign first responder
+{
+    return YES;
+}
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
+// called when text ends editing
+{
+        NSLog(@"searchBarTextDidEndEditing");
+}
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+// called when text changes (including clear)
+{
+        NSLog(@"textDidChange");
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+// called when keyboard search button pressed
+{
+        NSLog(@"searchBarSearchButtonClicked");
+    if (appDelegate.twitterAccount)
+    {
+        [self getFeed];
+    }else
+    {
+        appDelegate.target = self;
+        appDelegate.selector = @selector(getFeed);
+        [appDelegate getTwitterAccount];
+        
+        NSLog(@"searchBarSearchButtonClicked Account nil");
+    }
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar
+// called when cancel button pressed
+{
+        NSLog(@"searchBarCancelButtonClicked");     
+}
 
 
 - (void)didReceiveMemoryWarning
