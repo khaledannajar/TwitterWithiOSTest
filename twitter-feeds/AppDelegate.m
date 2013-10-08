@@ -164,11 +164,8 @@
 {
     NSLog(@"callSelector");
     if (self.selector && self.target) {
-//        - (void)performSelector:(SEL)aSelector target:(id)target argument:(id)anArgument order:(NSUInteger)order modes:(NSArray *)modes on the [NSRunLoop mainRunLoop]
-//    [self.target performSelector:self.selector];
-        [self.target performSelectorOnMainThread:self.selector withObject:nil waitUntilDone:NO modes:[NSArray arrayWithObject:[NSRunLoop mainRunLoop]]]
-        ;    }
-
+        [self.target performSelectorOnMainThread:self.selector withObject:nil waitUntilDone:NO modes:[NSArray arrayWithObject:[NSRunLoop mainRunLoop]]];
+    }
 }
 
 @end
