@@ -22,6 +22,7 @@
 NSArray *tweetsArray;
 }
     @property (strong, nonatomic) NSArray *tweetsArray;
+    @property (nonatomic, retain) UIApplication *sharedApplication;
 @end
 
 @implementation FirstViewController
@@ -33,6 +34,11 @@ NSArray *tweetsArray;
     
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
+    
+    self.searchBar = [[UISearchBar alloc]init];
+
+    self.sharedApplication = [UIApplication sharedApplication];
+    self.sharedApplication.networkActivityIndicatorVisible = YES;
     
 //    TODO: show loading view
 //    call service

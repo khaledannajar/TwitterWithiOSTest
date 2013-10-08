@@ -12,12 +12,6 @@
                         <rect key="frame" x="0.0" y="20" width="320" height="499"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" barStyle="blackOpaque" translatesAutoresizingMaskIntoConstraints="NO" id="lpD-VQ-g25">
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="2" id="lMm-qH-rzq"/>
-                                </connections>
-                            </searchBar>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="NCR-o4-4NQ">
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -31,20 +25,26 @@
                                 </collectionViewFlowLayout>
                                 <cells/>
                             </collectionView>
+                            <searchBar contentMode="redraw" barStyle="blackOpaque" translatesAutoresizingMaskIntoConstraints="NO" id="mUm-Q9-zhF">
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="2" id="pPM-dh-Nyd"/>
+                                </connections>
+                            </searchBar>
                         </subviews>
                         <constraints>
                             <constraint firstItem="NCR-o4-4NQ" firstAttribute="leading" secondItem="16" secondAttribute="leading" type="default" id="60I-aT-UwQ"/>
-                            <constraint firstItem="lpD-VQ-g25" firstAttribute="trailing" secondItem="16" secondAttribute="trailing" type="default" id="9cF-af-uvr"/>
+                            <constraint firstItem="NCR-o4-4NQ" firstAttribute="top" secondItem="mUm-Q9-zhF" secondAttribute="bottom" type="user" id="8aR-NK-Cd5"/>
+                            <constraint firstItem="mUm-Q9-zhF" firstAttribute="bottom" secondItem="NCR-o4-4NQ" secondAttribute="top" type="user" id="AaP-me-zIe"/>
                             <constraint firstItem="NCR-o4-4NQ" firstAttribute="bottom" secondItem="16" secondAttribute="bottom" type="default" id="Gac-7K-nrc"/>
+                            <constraint firstItem="mUm-Q9-zhF" firstAttribute="centerX" secondItem="NCR-o4-4NQ" secondAttribute="centerX" type="user" id="Vp2-s5-Xwm"/>
                             <constraint firstItem="NCR-o4-4NQ" firstAttribute="trailing" secondItem="16" secondAttribute="trailing" type="default" id="YBD-vq-Nnl"/>
-                            <constraint firstItem="lpD-VQ-g25" firstAttribute="leading" secondItem="16" secondAttribute="leading" type="default" id="llY-Eg-vR8"/>
-                            <constraint firstItem="NCR-o4-4NQ" firstAttribute="top" secondItem="lpD-VQ-g25" secondAttribute="bottom" type="default" id="qxK-aH-gRl"/>
+                            <constraint firstItem="mUm-Q9-zhF" firstAttribute="leading" secondItem="16" secondAttribute="leading" type="default" id="bTM-Tv-vi3"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="First" image="first" id="7"/>
                     <connections>
                         <outlet property="collectionView" destination="NCR-o4-4NQ" id="hTf-C7-UoK"/>
-                        <outlet property="searchBar" destination="lpD-VQ-g25" id="qRn-z3-8Y3"/>
                         <outlet property="searchDisplayController" destination="Imh-Vf-bGQ" id="BpD-GT-xQe"/>
                     </connections>
                 </viewController>
@@ -52,7 +52,6 @@
                 <searchDisplayController id="Imh-Vf-bGQ">
                     <connections>
                         <outlet property="delegate" destination="2" id="Wxo-95-t8o"/>
-                        <outlet property="searchBar" destination="lpD-VQ-g25" id="h6B-ut-kPn"/>
                         <outlet property="searchContentsController" destination="2" id="uiC-gD-ne5"/>
                         <outlet property="searchResultsDataSource" destination="2" id="zR1-oo-iQQ"/>
                         <outlet property="searchResultsDelegate" destination="2" id="GNZ-7m-mqC"/>
@@ -139,6 +138,9 @@
         </class>
         <class className="UICollectionViewFlowLayout" superclassName="UICollectionViewLayout">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewFlowLayout.h"/>
+        </class>
+        <class className="UICollectionViewLayout" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewLayout.h"/>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

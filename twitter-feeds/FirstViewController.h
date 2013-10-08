@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface FirstViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource, UISearchBarDelegate>
-@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (retain, nonatomic) IBOutlet UISearchBar *searchBar;
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
+- (void)getFeed;
 @end
