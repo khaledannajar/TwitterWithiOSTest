@@ -167,7 +167,7 @@
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 // called when text changes (including clear)
 {
-        NSLog(@"textDidChange");
+
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
@@ -175,6 +175,9 @@
 {
     self.searchToken = [searchBar.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
         [searchBar resignFirstResponder];
+    if (self.statuses) {
+    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UICollectionViewScrollPositionTop animated:YES];
+    }
         NSLog(@"searchBarSearchButtonClicked");
     if (appDelegate.twitterAccount)
     {
