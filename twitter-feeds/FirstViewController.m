@@ -118,22 +118,39 @@
     NSArray* coordinates = [oneTweet objectForKey:@"coordinates"];
     
     NSLog(@"name = %@ createdAt %@, tweetText %@, retweetCount %@, profileImage %@, coordinates %@", tweeteeName, createdAt, tweetText, retweetCount, profileImage, coordinates);
+
     
     
     tweeterNameTxtView.text = tweeteeName;
     tweetedTxtView.text = tweetText;
     tweeterDateTxtView.text = createdAt;
     //TODO: CHANGE this check it is not working : check for kcfnull
-    if (![@"0" isEqualToString:retweetCount]) {
-        [retweetedImageView setHidden:NO];
-    }else{
-        [retweetedImageView setHidden:true];
+    if ([retweetCount isKindOfClass:[NSNumber class]]) {
+        if (retweetCount > 0) {
+            [retweetedImageView setHidden:NO];
+        }else{
+            [retweetedImageView setHidden:YES];
+        }
+    }else
+    {
+        if ([retweetCount isEqualToString:@"100+"]) {
+            [retweetedImageView setHidden:YES];
+        }else{
+            [retweetedImageView setHidden:NO]; // in case of null
+        }
     }
 
-    if ([Util isEmpty:coordinates]) {
-        [placesImageView setHidden:NO];
-    }else{
+    if ([Util isEmpty:coordinates] || [[NSNull null] isEqual:coordinates]) {
         [placesImageView setHidden:YES];
+    }else{
+        [placesImageView setHidden:NO];
+        
+        placesImageView.userInteractionEnabled = YES;
+        UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]
+                                         initWithTarget:self action:@selector(handlePinch:)];
+        
+        tapGestureRecognizer.delegate = self;
+        [placesImageView addGestureRecognizer:tapGestureRecognizer];
     }
     
     [saveButton addTarget:self action:@selector(saveButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -199,7 +216,7 @@
     [searchBar resignFirstResponder];
 }
 
-#pragma - mark save button methods
+#pragma - mark save button, location methods
 
 -(void) saveButtonClicked:(UIButton *)button
 {
@@ -215,6 +232,12 @@
     }else{
         NSLog(@"saveButton indexPath is nil");
     }
+}
+
+- (void)handlePinch:(UIPinchGestureRecognizer *)pinchGestureRecognizer
+{
+        NSLog(@"tapGestureRecognizer");
+    // TODO: should move to the map - search for cafe
 }
 
 
