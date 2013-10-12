@@ -94,18 +94,10 @@
     UIImageView *placesImageView = (UIImageView *)[cell viewWithTag:3];
 
 
-    UITextView* tweeterNameTxtView = (UITextView*) [cell viewWithTag:4];
-        UITextView* tweetedTxtView = (UITextView*) [cell viewWithTag:5];
-        UITextView* tweeterDateTxtView = (UITextView*) [cell viewWithTag:6];
+    UILabel* tweeterNameLabel = (UILabel*) [cell viewWithTag:4];
+        UILabel* tweetedTxtView = (UILabel*) [cell viewWithTag:5];
+        UILabel* tweeterDateTxtView = (UILabel*) [cell viewWithTag:6];
     UIButton* saveButton = (UIButton*) [cell viewWithTag:7];
-    
-//    retweet image : 1
-//    profile image: 2
-//places: 3
-//    tweeter name: 4
-//    tweeted text: 5
-//    date 6
-//    save 7
     
     NSDictionary* oneTweet = [self.statuses objectAtIndex:indexPath.row];
     NSDictionary* user = [oneTweet objectForKey:@"user"];
@@ -121,10 +113,10 @@
 
     
     
-    tweeterNameTxtView.text = tweeteeName;
+    tweeterNameLabel.text = tweeteeName;
     tweetedTxtView.text = tweetText;
     tweeterDateTxtView.text = createdAt;
-    //TODO: CHANGE this check it is not working : check for kcfnull
+
     if ([retweetCount isKindOfClass:[NSNumber class]]) {
         if (retweetCount > 0) {
             [retweetedImageView setHidden:NO];
@@ -133,10 +125,10 @@
         }
     }else
     {
-        if ([retweetCount isEqualToString:@"100+"]) {
+        if ([[NSNull null] isEqual:retweetCount]) {
             [retweetedImageView setHidden:YES];
         }else{
-            [retweetedImageView setHidden:NO]; // in case of null
+            [retweetedImageView setHidden:NO];
         }
     }
 
