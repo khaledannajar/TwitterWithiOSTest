@@ -77,13 +77,32 @@
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
 //        NSLog(@"sizeForItemAtIndexPath");
-//    NSString* string;
-//    [string sizeWithFont:[UIFont systemFontOfSize:15] forWidth:50 lineBreakMode:NSLineBreakByWordWrapping];
+
+    //        TODO: to be moved to getFeeds method for better Performance
+    
+    float image_up_space = 11;
+    float image_height = 46;
+    float image_tweet_txt_height = 20;
+    float tweet_text_button_height = 12;
+    float button_height = 31;
+    float tweet_txt_height = 40;
+    float underButtonHeight = 10;
+    
     float width = SCR_WIDTH -10;
     if (IS_IPAD) {
         width = 320;
     }
-    return CGSizeMake(width, 200);
+    
+    NSDictionary* oneTweet = [self.statuses objectAtIndex:indexPath.row];
+    NSString* string = [oneTweet objectForKey:@"text"];
+    tweet_txt_height = [string sizeWithFont:[UIFont systemFontOfSize:20] forWidth:width lineBreakMode:NSLineBreakByWordWrapping].height;
+
+
+
+    
+    float height = image_up_space + image_height + image_tweet_txt_height + tweet_text_button_height + button_height + tweet_txt_height + underButtonHeight;
+    
+    return CGSizeMake(width, height);//200);
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -149,7 +168,10 @@
         tapGestureRecognizer.delegate = self;
         [placesImageView addGestureRecognizer:tapGestureRecognizer];
     }
-    
+//    TODO test code to be removed
+    [profileImageView setImage:[UIImage imageNamed:@"green_tea.jpg"]];
+    [profileImageView setHidden:NO];
+//    End test code
     [saveButton addTarget:self action:@selector(saveButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     
