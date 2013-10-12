@@ -144,7 +144,7 @@
         
         placesImageView.userInteractionEnabled = YES;
         UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]
-                                         initWithTarget:self action:@selector(handlePinch:)];
+                                         initWithTarget:self action:@selector(handleTap:)];
         
         tapGestureRecognizer.delegate = self;
         [placesImageView addGestureRecognizer:tapGestureRecognizer];
@@ -231,7 +231,7 @@
     }
 }
 
-- (void)handlePinch:(UIPinchGestureRecognizer *)pinchGestureRecognizer
+- (void)handleTap:(UIPinchGestureRecognizer *)pinchGestureRecognizer
 {
         NSLog(@"tapGestureRecognizer");
     // TODO: should move to the map - search for cafe
