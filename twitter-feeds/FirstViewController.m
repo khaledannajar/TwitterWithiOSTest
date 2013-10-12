@@ -15,7 +15,9 @@
 #import "Util.h"
 
 #define TWITTER_BASE_URL ([NSURL URLWithString:@"https://api.twitter.com/1.1/search/tweets.json"])
-
+#define SCR_WIDTH ([[UIScreen mainScreen] bounds].size.width)
+#define SCR_HEIGHT ([[UIScreen mainScreen] bounds].size.height)
+#define IS_IPAD ([[UIDevice currentDevice].model rangeOfString:@"iPad"].location != NSNotFound)
 
 @interface FirstViewController ()
 {
@@ -77,8 +79,11 @@
 //        NSLog(@"sizeForItemAtIndexPath");
 //    NSString* string;
 //    [string sizeWithFont:[UIFont systemFontOfSize:15] forWidth:50 lineBreakMode:NSLineBreakByWordWrapping];
-    
-    return CGSizeMake(225, 200);
+    float width = SCR_WIDTH -10;
+    if (IS_IPAD) {
+        width = 320;
+    }
+    return CGSizeMake(width, 200);
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
