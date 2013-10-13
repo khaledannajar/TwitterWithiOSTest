@@ -76,17 +76,6 @@
 }
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-//        NSLog(@"sizeForItemAtIndexPath");
-
-    //        TODO: to be moved to getFeeds method for better Performance
-    
-    float image_up_space = 11;
-    float image_height = 46;
-    float image_tweet_txt_height = 20;
-    float tweet_text_button_height = 12;
-    float button_height = 32;
-    float tweet_txt_height = 40;
-    float underButtonHeight = 10;
     
     float width = SCR_WIDTH -10;
     if (IS_IPAD) {
@@ -94,17 +83,10 @@
     }
     
     NSDictionary* oneTweet = [self.statuses objectAtIndex:indexPath.row];
-    NSString* string = [oneTweet objectForKey:@"text"];
-    tweet_txt_height = [string sizeWithFont:[UIFont systemFontOfSize:17] constrainedToSize:CGSizeMake(width, 20 * 10) lineBreakMode:NSLineBreakByWordWrapping].height;
-    
-    NSLog(@"height2 =%f",tweet_txt_height);
 
-//    tweet_txt_height = [[oneTweet objectForKey:HEIGHT_DICTIONARY_KEY] floatValue];
+    float height = [[oneTweet objectForKey:HEIGHT_DICTIONARY_KEY] floatValue];
     
-    float height = image_up_space + image_height + image_tweet_txt_height + tweet_text_button_height + button_height + tweet_txt_height + underButtonHeight;
-//    float height = [[oneTweet objectForKey:HEIGHT_DICTIONARY_KEY] floatValue];
-//    NSLog(@"height =%f",height);
-    return CGSizeMake(width, height);//200);
+    return CGSizeMake(width, height);
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -124,7 +106,6 @@
         UILabel* tweetedTxtView = (UILabel*) [cell viewWithTag:5];
         UILabel* tweeterDateTxtView = (UILabel*) [cell viewWithTag:6];
     UIButton* saveButton = (UIButton*) [cell viewWithTag:7];
-//    NSLog(@"profileImageView size=%f, tweetedTxtView size=%f, tweeterDateTxtView size=%f, saveButton size=%f placesImageView=%f", profileImageView.bounds.size.height, tweetedTxtView.bounds.size.height, tweeterDateTxtView.bounds.size.height, saveButton.bounds.size.height, placesImageView.bounds.size.height);
     
     NSDictionary* oneTweet = [self.statuses objectAtIndex:indexPath.row];
     NSDictionary* user = [oneTweet objectForKey:@"user"];
@@ -330,31 +311,31 @@
     self.tweetsDic = (NSDictionary *)feedData;
     self.statuses = [NSMutableArray arrayWithArray:[self.tweetsDic objectForKey:@"statuses"]];
 
-    ////////
     
-//    float image_up_space = 11;
-//    float image_height = 46;
-//    float image_tweet_txt_height = 20;
-//    float tweet_text_button_height = 12;
-//    float button_height = 32;
-//    float tweet_txt_height = 40;
-//    float underButtonHeight = 10;
-//    
-//    float width = SCR_WIDTH -10;
-//    if (IS_IPAD) {
-//        width = 320;
-//    }
-//    for (int index=0; index < self.statuses.count; index++) {
-//        NSMutableDictionary* oneTweet = [NSMutableDictionary dictionaryWithDictionary:[self.statuses objectAtIndex:index]];
-//        NSString* string = [oneTweet objectForKey:@"text"];
-//        tweet_txt_height = [string sizeWithFont:[UIFont systemFontOfSize:17] constrainedToSize:CGSizeMake(width, 19 * 10) lineBreakMode:NSLineBreakByWordWrapping].height;
-//
-//        float height = image_up_space + image_height + image_tweet_txt_height + tweet_text_button_height + button_height + tweet_txt_height + underButtonHeight;
-//        [oneTweet setObject:[NSNumber numberWithFloat:height] forKey:HEIGHT_DICTIONARY_KEY];
-//            NSLog(@"height2 =%f",height);
-//    }
+    float image_up_space = 11;
+    float image_height = 46;
+    float image_tweet_txt_height = 20;
+    float tweet_text_button_height = 12;
+    float button_height = 32;
+    float tweet_txt_height = 40;
+    float underButtonHeight = 10;
     
-///////////////
+    float width = SCR_WIDTH -10;
+    if (IS_IPAD) {
+        width = 320;
+    }
+    for (int index=0; index < self.statuses.count; index++) {
+        NSMutableDictionary* oneTweet = [NSMutableDictionary dictionaryWithDictionary:[self.statuses objectAtIndex:index]];
+        NSString* string = [oneTweet objectForKey:@"text"];
+        tweet_txt_height = [string sizeWithFont:[UIFont systemFontOfSize:17] constrainedToSize:CGSizeMake(width, 19 * 10) lineBreakMode:NSLineBreakByWordWrapping].height;
+
+        float height = image_up_space + image_height + image_tweet_txt_height + tweet_text_button_height + button_height + tweet_txt_height + underButtonHeight;
+        [oneTweet setObject:[NSNumber numberWithFloat:height] forKey:HEIGHT_DICTIONARY_KEY];
+        [self.statuses setObject:oneTweet atIndexedSubscript:index];
+            NSLog(@"height2 =%f",height);
+        NSLog(@"HEIGHT_DICTIONARY =%f",        [[oneTweet objectForKey:HEIGHT_DICTIONARY_KEY]floatValue]);
+    }
+    
     [self.collectionView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
 }
 
