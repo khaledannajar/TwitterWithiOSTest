@@ -18,7 +18,7 @@
 #define SCR_WIDTH ([[UIScreen mainScreen] bounds].size.width)
 #define SCR_HEIGHT ([[UIScreen mainScreen] bounds].size.height)
 #define IS_IPAD ([[UIDevice currentDevice].model rangeOfString:@"iPad"].location != NSNotFound)
-
+#define HEIGHT_DICTIONARY_KEY (@"height")
 @interface FirstViewController ()
 {
     NSArray *recipeImages;
@@ -28,7 +28,7 @@
     @property (strong, nonatomic) NSDictionary *tweetsDic;
     @property (nonatomic, retain) UIApplication *sharedApplication;
     @property (nonatomic, retain) NSString* searchToken;
-    @property (nonatomic, retain) NSArray* statuses;
+    @property (nonatomic, retain) NSMutableArray* statuses;
 
 @end
 
@@ -84,7 +84,7 @@
     float image_height = 46;
     float image_tweet_txt_height = 20;
     float tweet_text_button_height = 12;
-    float button_height = 31;
+    float button_height = 32;
     float tweet_txt_height = 40;
     float underButtonHeight = 10;
     
@@ -95,13 +95,15 @@
     
     NSDictionary* oneTweet = [self.statuses objectAtIndex:indexPath.row];
     NSString* string = [oneTweet objectForKey:@"text"];
-    tweet_txt_height = [string sizeWithFont:[UIFont systemFontOfSize:20] forWidth:width lineBreakMode:NSLineBreakByWordWrapping].height;
+    tweet_txt_height = [string sizeWithFont:[UIFont systemFontOfSize:17] constrainedToSize:CGSizeMake(width, 20 * 10) lineBreakMode:NSLineBreakByWordWrapping].height;
+    
+    NSLog(@"height2 =%f",tweet_txt_height);
 
-
-
+//    tweet_txt_height = [[oneTweet objectForKey:HEIGHT_DICTIONARY_KEY] floatValue];
     
     float height = image_up_space + image_height + image_tweet_txt_height + tweet_text_button_height + button_height + tweet_txt_height + underButtonHeight;
-    
+//    float height = [[oneTweet objectForKey:HEIGHT_DICTIONARY_KEY] floatValue];
+//    NSLog(@"height =%f",height);
     return CGSizeMake(width, height);//200);
 }
 
@@ -122,6 +124,7 @@
         UILabel* tweetedTxtView = (UILabel*) [cell viewWithTag:5];
         UILabel* tweeterDateTxtView = (UILabel*) [cell viewWithTag:6];
     UIButton* saveButton = (UIButton*) [cell viewWithTag:7];
+//    NSLog(@"profileImageView size=%f, tweetedTxtView size=%f, tweeterDateTxtView size=%f, saveButton size=%f placesImageView=%f", profileImageView.bounds.size.height, tweetedTxtView.bounds.size.height, tweeterDateTxtView.bounds.size.height, saveButton.bounds.size.height, placesImageView.bounds.size.height);
     
     NSDictionary* oneTweet = [self.statuses objectAtIndex:indexPath.row];
     NSDictionary* user = [oneTweet objectForKey:@"user"];
@@ -133,7 +136,7 @@
     NSString* retweetCount = [oneTweet objectForKey:@"retweet_count"];
     NSArray* coordinates = [oneTweet objectForKey:@"coordinates"];
     
-    NSLog(@"name = %@ createdAt %@, tweetText %@, retweetCount %@, profileImage %@, coordinates %@", tweeteeName, createdAt, tweetText, retweetCount, profileImage, coordinates);
+//    NSLog(@"name = %@ createdAt %@, tweetText %@, retweetCount %@, profileImage %@, coordinates %@", tweeteeName, createdAt, tweetText, retweetCount, profileImage, coordinates);
 
     
     
@@ -188,7 +191,7 @@
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar;
 // called when text starts editing
 {
-    NSLog(@"searchBarTextDidBeginEditing");
+
 }
 - (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar;
 // return NO to not resign first responder
@@ -198,7 +201,6 @@
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
 // called when text ends editing
 {
-        NSLog(@"searchBarTextDidEndEditing");
 }
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 // called when text changes (including clear)
@@ -324,10 +326,35 @@
         NSLog(@"updateFeed, feedData != nill");
     else
         NSLog(@"updateFeed, feedData = nill");
-    self.tweetsDic = nil;
-    self.tweetsDic = (NSDictionary *)feedData;
-    self.statuses = [self.tweetsDic objectForKey:@"statuses"];
 
+    self.tweetsDic = (NSDictionary *)feedData;
+    self.statuses = [NSMutableArray arrayWithArray:[self.tweetsDic objectForKey:@"statuses"]];
+
+    ////////
+    
+//    float image_up_space = 11;
+//    float image_height = 46;
+//    float image_tweet_txt_height = 20;
+//    float tweet_text_button_height = 12;
+//    float button_height = 32;
+//    float tweet_txt_height = 40;
+//    float underButtonHeight = 10;
+//    
+//    float width = SCR_WIDTH -10;
+//    if (IS_IPAD) {
+//        width = 320;
+//    }
+//    for (int index=0; index < self.statuses.count; index++) {
+//        NSMutableDictionary* oneTweet = [NSMutableDictionary dictionaryWithDictionary:[self.statuses objectAtIndex:index]];
+//        NSString* string = [oneTweet objectForKey:@"text"];
+//        tweet_txt_height = [string sizeWithFont:[UIFont systemFontOfSize:17] constrainedToSize:CGSizeMake(width, 19 * 10) lineBreakMode:NSLineBreakByWordWrapping].height;
+//
+//        float height = image_up_space + image_height + image_tweet_txt_height + tweet_text_button_height + button_height + tweet_txt_height + underButtonHeight;
+//        [oneTweet setObject:[NSNumber numberWithFloat:height] forKey:HEIGHT_DICTIONARY_KEY];
+//            NSLog(@"height2 =%f",height);
+//    }
+    
+///////////////
     [self.collectionView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
 }
 
