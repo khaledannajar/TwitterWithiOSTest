@@ -13,6 +13,7 @@
 #import <Twitter/Twitter.h>
 #import "AppDelegate.h"
 #import "Util.h"
+#import "MapViewController.h"
 
 #define TWITTER_BASE_URL ([NSURL URLWithString:@"https://api.twitter.com/1.1/search/tweets.json"])
 #define SCR_WIDTH ([[UIScreen mainScreen] bounds].size.width)
@@ -65,14 +66,7 @@
 #pragma  - mark data source methods
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-
-    if (self.statuses) {
-        NSLog(@"statuses count %d", self.statuses.count);
-        return self.statuses.count;
-    } else
-    {
-        return 0;
-    }
+    return self.statuses.count;
 }
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -113,11 +107,12 @@
     NSString* tweeteeName = [user objectForKey:@"name"];
     NSString* createdAt = [Util formatDateString:[oneTweet objectForKey:@"created_at"]];
     NSString* tweetText = [oneTweet objectForKey:@"text"];
-    NSString* profileImage = [oneTweet objectForKey:@"profile_image_url"];
+    NSString* profileImageUrl = [oneTweet objectForKey:@"profile_image_url"];
     NSString* retweetCount = [oneTweet objectForKey:@"retweet_count"];
     NSArray* coordinates = [oneTweet objectForKey:@"coordinates"];
     
-//    NSLog(@"name = %@ createdAt %@, tweetText %@, retweetCount %@, profileImage %@, coordinates %@", tweeteeName, createdAt, tweetText, retweetCount, profileImage, coordinates);
+    NSLog(@"name = %@ createdAt %@, tweetText %@, retweetCount %@, profileImage %@, coordinates %@", tweeteeName, createdAt, tweetText, retweetCount,
+          profileImageUrl, coordinates);
 
     
     
@@ -236,9 +231,32 @@
     }
 }
 
-- (void)handleTap:(UIPinchGestureRecognizer *)pinchGestureRecognizer
+- (void)handleTap:(UITapGestureRecognizer *)tapGestureRecognizer
 {
         NSLog(@"tapGestureRecognizer");
+    CGPoint tapLocation = [tapGestureRecognizer locationInView:self.collectionView];
+    NSIndexPath *indexPath = [self.collectionView indexPathForItemAtPoint:tapLocation];
+    
+    
+    NSDictionary* oneTweet = [self.statuses objectAtIndex:indexPath.row];
+    NSDictionary* coordinatesDict = [oneTweet objectForKey:@"coordinates"];
+    NSArray* coordinatesArray = [coordinatesDict objectForKey:@"coordinates"];
+ 
+    MapViewController* mapController = [[MapViewController alloc]initWithNibName:@"MapViewController" bundle:nil];
+    mapController.coordinates = coordinatesArray;
+    
+    NSDictionary* user = [oneTweet objectForKey:@"user"];
+    
+    NSString* tweeteeName = [user objectForKey:@"name"];
+    
+    mapController.tweteeTitle = tweeteeName;
+    
+//    TODO: use nav and right bar button instead of toolbar
+//    UINavigationController* nav = [[UINavigationController alloc]initWithRootViewController:mapController];
+
+//    [self presentViewController:nav animated:YES completion:nil];
+    
+    [self presentViewController:mapController animated:YES completion:nil];
     // TODO: should move to the map - search for cafe
 }
 
@@ -276,7 +294,6 @@
             if (!jsonError)
             {
                 // If no errors were found during the JSON parsing our feed table
-                NSLog(@"! jsonError");
                 [self updateFeed:feedData]; }
             else
             {
@@ -303,10 +320,10 @@
 }
 
 - (void)updateFeed:(id)feedData {
-    if(feedData)
-        NSLog(@"updateFeed, feedData != nill");
-    else
-        NSLog(@"updateFeed, feedData = nill");
+//    if(feedData)
+//        NSLog(@"updateFeed, feedData != nill");
+//    else
+//        NSLog(@"updateFeed, feedData = nill");
 
     self.tweetsDic = (NSDictionary *)feedData;
     self.statuses = [NSMutableArray arrayWithArray:[self.tweetsDic objectForKey:@"statuses"]];
@@ -332,8 +349,6 @@
         float height = image_up_space + image_height + image_tweet_txt_height + tweet_text_button_height + button_height + tweet_txt_height + underButtonHeight;
         [oneTweet setObject:[NSNumber numberWithFloat:height] forKey:HEIGHT_DICTIONARY_KEY];
         [self.statuses setObject:oneTweet atIndexedSubscript:index];
-            NSLog(@"height2 =%f",height);
-        NSLog(@"HEIGHT_DICTIONARY =%f",        [[oneTweet objectForKey:HEIGHT_DICTIONARY_KEY]floatValue]);
     }
     
     [self.collectionView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];

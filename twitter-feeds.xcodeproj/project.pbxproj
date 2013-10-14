@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7918B20A180C40DC00556C64 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7918B208180C40DC00556C64 /* MapViewController.m */; };
+		7918B20B180C40DC00556C64 /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7918B209180C40DC00556C64 /* MapViewController.xib */; };
+		7918B20E180C421F00556C64 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7918B20D180C421F00556C64 /* MapKit.framework */; };
 		792604B118006A2900CEE41E /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 792604B018006A2900CEE41E /* Twitter.framework */; };
 		792604B418014F4400CEE41E /* places_pin_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 792604B318014F4400CEE41E /* places_pin_icon.png */; };
 		792604B718014F8500CEE41E /* retweet_hover.png in Resources */ = {isa = PBXBuildFile; fileRef = 792604B518014F8500CEE41E /* retweet_hover.png */; };
@@ -37,6 +40,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7918B207180C40DC00556C64 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		7918B208180C40DC00556C64 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		7918B209180C40DC00556C64 /* MapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
+		7918B20D180C421F00556C64 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		792604B018006A2900CEE41E /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		792604B318014F4400CEE41E /* places_pin_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = places_pin_icon.png; sourceTree = "<group>"; };
 		792604B518014F8500CEE41E /* retweet_hover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = retweet_hover.png; sourceTree = "<group>"; };
@@ -79,6 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7918B20E180C421F00556C64 /* MapKit.framework in Frameworks */,
 				792604B118006A2900CEE41E /* Twitter.framework in Frameworks */,
 				79F95DBD17FFFFAE0001617D /* Accounts.framework in Frameworks */,
 				7971712817FF126E00023B31 /* Social.framework in Frameworks */,
@@ -110,6 +118,7 @@
 		79E74F0A17FCA58400A91779 = {
 			isa = PBXGroup;
 			children = (
+				7918B20D180C421F00556C64 /* MapKit.framework */,
 				792604B018006A2900CEE41E /* Twitter.framework */,
 				79E74F1F17FCA58400A91779 /* twitter-feeds */,
 				79E74F1817FCA58400A91779 /* Frameworks */,
@@ -148,6 +157,9 @@
 				79E74F3517FCA58400A91779 /* FirstViewController.m */,
 				79E74F3B17FCA58400A91779 /* SecondViewController.h */,
 				79E74F3C17FCA58400A91779 /* SecondViewController.m */,
+				7918B207180C40DC00556C64 /* MapViewController.h */,
+				7918B208180C40DC00556C64 /* MapViewController.m */,
+				7918B209180C40DC00556C64 /* MapViewController.xib */,
 				79E74F2817FCA58400A91779 /* AppDelegate.h */,
 				79E74F2917FCA58400A91779 /* AppDelegate.m */,
 				79E74F4D17FCA60F00A91779 /* images */,
@@ -270,6 +282,7 @@
 				792604B718014F8500CEE41E /* retweet_hover.png in Resources */,
 				792604B818014F8500CEE41E /* retweet.png in Resources */,
 				798405BE1809E72500E8FBAA /* green_tea.jpg in Resources */,
+				7918B20B180C40DC00556C64 /* MapViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,6 +299,7 @@
 				79E74F3D17FCA58400A91779 /* SecondViewController.m in Sources */,
 				796662271801E6DC00094679 /* TweetRetrun.m in Sources */,
 				7952E0611804A25B0007FEB3 /* Util.m in Sources */,
+				7918B20A180C40DC00556C64 /* MapViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
