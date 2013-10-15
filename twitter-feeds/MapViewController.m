@@ -34,10 +34,11 @@
     MKPointAnnotation* point = [[MKPointAnnotation alloc]init];
     point.coordinate = coordinates;
     point.title = self.tweteeTitle;
-
+    
+    [self.mapView addAnnotation:point];
+    
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(coordinates, 0.5*METERS_PER_MILE, 0.5*METERS_PER_MILE);
     [self.mapView setRegion:region animated:YES];
-    [self.mapView addAnnotation:point];
 }
 
 - (void)viewDidLoad
