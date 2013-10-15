@@ -233,7 +233,6 @@
 
 - (void)handleTap:(UITapGestureRecognizer *)tapGestureRecognizer
 {
-        NSLog(@"tapGestureRecognizer");
     CGPoint tapLocation = [tapGestureRecognizer locationInView:self.collectionView];
     NSIndexPath *indexPath = [self.collectionView indexPathForItemAtPoint:tapLocation];
     
@@ -241,23 +240,16 @@
     NSDictionary* oneTweet = [self.statuses objectAtIndex:indexPath.row];
     NSDictionary* coordinatesDict = [oneTweet objectForKey:@"coordinates"];
     NSArray* coordinatesArray = [coordinatesDict objectForKey:@"coordinates"];
- 
-    MapViewController* mapController = [[MapViewController alloc]initWithNibName:@"MapViewController" bundle:nil];
-    mapController.coordinates = coordinatesArray;
-    
     NSDictionary* user = [oneTweet objectForKey:@"user"];
     
     NSString* tweeteeName = [user objectForKey:@"name"];
     
+    MapViewController* mapController = [[MapViewController alloc]initWithNibName:@"MapViewController" bundle:nil];
+    mapController.coordinates = coordinatesArray;
     mapController.tweteeTitle = tweeteeName;
     
-//    TODO: use nav and right bar button instead of toolbar
-//    UINavigationController* nav = [[UINavigationController alloc]initWithRootViewController:mapController];
-
-//    [self presentViewController:nav animated:YES completion:nil];
-    
-    [self presentViewController:mapController animated:YES completion:nil];
-    // TODO: should move to the map - search for cafe
+    UINavigationController* nav = [[UINavigationController alloc]initWithRootViewController:mapController];
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 
