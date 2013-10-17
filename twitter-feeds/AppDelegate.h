@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <Accounts/Accounts.h>
+#import "DataManager.h"
 
 #define AccountTwitterAccountAccessGranted @"TwitterAccountAccessGranted"
 
@@ -17,6 +18,7 @@
 @property (nonatomic, retain) ACAccount* twitterAccount;
 @property (nonatomic, retain) NSObject* target;
 @property (nonatomic) SEL selector;
+@property (nonatomic, retain) DataManager* dataManager;
 
 - (void)getTwitterAccount;
 
