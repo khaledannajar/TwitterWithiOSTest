@@ -41,8 +41,6 @@
     
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
-    
-    self.searchBar = [[UISearchBar alloc]init];
 
     self.sharedApplication = [UIApplication sharedApplication];
     
@@ -108,10 +106,13 @@
     NSString* createdAt = [Util formatDateString:[oneTweet objectForKey:@"created_at"]];
     NSString* tweetText = [oneTweet objectForKey:@"text"];
     NSString* profileImageUrl = [oneTweet objectForKey:@"profile_image_url"];
-    NSString* retweetCount = [oneTweet objectForKey:@"retweet_count"];
+    NSString* retweeted = [oneTweet objectForKey:@"retweeted"];
+
+
+
     NSArray* coordinates = [oneTweet objectForKey:@"coordinates"];
     
-    NSLog(@"name = %@ createdAt %@, tweetText %@, retweetCount %@, profileImage %@, coordinates %@", tweeteeName, createdAt, tweetText, retweetCount,
+    NSLog(@"name = %@ createdAt %@, tweetText %@, retweetCount %@, profileImage %@, coordinates %@", tweeteeName, createdAt, tweetText, retweeted,
           profileImageUrl, coordinates);
 
     
@@ -120,19 +121,11 @@
     tweetedTxtView.text = tweetText;
     tweeterDateTxtView.text = createdAt;
 
-    if ([retweetCount isKindOfClass:[NSNumber class]]) {
-        if (retweetCount > 0) {
+    if ([retweeted boolValue]) {
             [retweetedImageView setHidden:NO];
-        }else{
-            [retweetedImageView setHidden:YES];
-        }
     }else
     {
-        if ([[NSNull null] isEqual:retweetCount]) {
             [retweetedImageView setHidden:YES];
-        }else{
-            [retweetedImageView setHidden:NO];
-        }
     }
 
     if ([Util isEmpty:coordinates] || [[NSNull null] isEqual:coordinates]) {
@@ -312,10 +305,6 @@
 }
 
 - (void)updateFeed:(id)feedData {
-//    if(feedData)
-//        NSLog(@"updateFeed, feedData != nill");
-//    else
-//        NSLog(@"updateFeed, feedData = nill");
 
     self.tweetsDic = (NSDictionary *)feedData;
     self.statuses = [NSMutableArray arrayWithArray:[self.tweetsDic objectForKey:@"statuses"]];
