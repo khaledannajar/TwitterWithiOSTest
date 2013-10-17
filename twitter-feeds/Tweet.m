@@ -12,11 +12,11 @@
 
 @implementation Tweet
 
-@dynamic tweeteeName;
 @dynamic createdAt;
-@dynamic tweetText;
 @dynamic profileImageUrl;
 @dynamic retweeted;
+@dynamic tweeteeName;
+@dynamic tweetText;
 @dynamic coordinates;
 
 @end

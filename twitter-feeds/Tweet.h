@@ -13,11 +13,11 @@
 
 @interface Tweet : NSManagedObject
 
-@property (nonatomic, retain) NSString * tweeteeName;
 @property (nonatomic, retain) NSDate * createdAt;
-@property (nonatomic, retain) NSString * tweetText;
 @property (nonatomic, retain) NSString * profileImageUrl;
-@property (nonatomic, retain) NSString * retweeted;
+@property (nonatomic, retain) NSNumber * retweeted;
+@property (nonatomic, retain) NSString * tweeteeName;
+@property (nonatomic, retain) NSString * tweetText;
 @property (nonatomic, retain) Coordinates *coordinates;
 
 @end

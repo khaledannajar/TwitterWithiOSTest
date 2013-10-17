@@ -13,6 +13,6 @@
 +( BOOL) isEmpty:(id) thing;
 
 +(NSString*) formatDateString:(NSString*) input;
-
++(NSDate*) getTwitterDateFromString:(NSString*) input;
 
 @end

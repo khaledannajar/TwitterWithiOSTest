@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		790875DC181082650005B52B /* Coordinates.m in Sources */ = {isa = PBXBuildFile; fileRef = 790875DB181082650005B52B /* Coordinates.m */; };
+		790875E0181082910005B52B /* Tweet.m in Sources */ = {isa = PBXBuildFile; fileRef = 790875DF181082910005B52B /* Tweet.m */; };
 		7918B20A180C40DC00556C64 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7918B208180C40DC00556C64 /* MapViewController.m */; };
 		7918B20B180C40DC00556C64 /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7918B209180C40DC00556C64 /* MapViewController.xib */; };
 		7918B20E180C421F00556C64 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7918B20D180C421F00556C64 /* MapKit.framework */; };
@@ -16,8 +18,6 @@
 		792604B718014F8500CEE41E /* retweet_hover.png in Resources */ = {isa = PBXBuildFile; fileRef = 792604B518014F8500CEE41E /* retweet_hover.png */; };
 		792604B818014F8500CEE41E /* retweet.png in Resources */ = {isa = PBXBuildFile; fileRef = 792604B618014F8500CEE41E /* retweet.png */; };
 		79444FFE18102ED1006BE317 /* TweetModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 79444FFC18102ED1006BE317 /* TweetModel.xcdatamodeld */; };
-		79445005181030A2006BE317 /* Tweet.m in Sources */ = {isa = PBXBuildFile; fileRef = 79445004181030A2006BE317 /* Tweet.m */; };
-		79445008181030BF006BE317 /* Coordinates.m in Sources */ = {isa = PBXBuildFile; fileRef = 79445007181030BF006BE317 /* Coordinates.m */; };
 		7944500B181031D9006BE317 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7944500A181031D9006BE317 /* DataManager.m */; };
 		7952E0611804A25B0007FEB3 /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 7952E0601804A25B0007FEB3 /* Util.m */; };
 		796662271801E6DC00094679 /* TweetRetrun.m in Sources */ = {isa = PBXBuildFile; fileRef = 796662261801E6DC00094679 /* TweetRetrun.m */; };
@@ -45,6 +45,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		790875DA181082650005B52B /* Coordinates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Coordinates.h; sourceTree = "<group>"; };
+		790875DB181082650005B52B /* Coordinates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Coordinates.m; sourceTree = "<group>"; };
+		790875DE181082910005B52B /* Tweet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tweet.h; sourceTree = "<group>"; };
+		790875DF181082910005B52B /* Tweet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tweet.m; sourceTree = "<group>"; };
 		7918B207180C40DC00556C64 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		7918B208180C40DC00556C64 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		7918B209180C40DC00556C64 /* MapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
@@ -55,10 +59,6 @@
 		792604B518014F8500CEE41E /* retweet_hover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = retweet_hover.png; sourceTree = "<group>"; };
 		792604B618014F8500CEE41E /* retweet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = retweet.png; sourceTree = "<group>"; };
 		79444FFD18102ED1006BE317 /* TweetModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TweetModel.xcdatamodel; sourceTree = "<group>"; };
-		79445003181030A2006BE317 /* Tweet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tweet.h; sourceTree = "<group>"; };
-		79445004181030A2006BE317 /* Tweet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tweet.m; sourceTree = "<group>"; };
-		79445006181030BF006BE317 /* Coordinates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Coordinates.h; sourceTree = "<group>"; };
-		79445007181030BF006BE317 /* Coordinates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Coordinates.m; sourceTree = "<group>"; };
 		79445009181031D8006BE317 /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
 		7944500A181031D9006BE317 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
 		7952E05F1804A25B0007FEB3 /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
@@ -228,10 +228,10 @@
 				796662251801E6DC00094679 /* TweetRetrun.h */,
 				796662261801E6DC00094679 /* TweetRetrun.m */,
 				79444FFC18102ED1006BE317 /* TweetModel.xcdatamodeld */,
-				79445003181030A2006BE317 /* Tweet.h */,
-				79445004181030A2006BE317 /* Tweet.m */,
-				79445006181030BF006BE317 /* Coordinates.h */,
-				79445007181030BF006BE317 /* Coordinates.m */,
+				790875DE181082910005B52B /* Tweet.h */,
+				790875DF181082910005B52B /* Tweet.m */,
+				790875DA181082650005B52B /* Coordinates.h */,
+				790875DB181082650005B52B /* Coordinates.m */,
 				79445009181031D8006BE317 /* DataManager.h */,
 				7944500A181031D9006BE317 /* DataManager.m */,
 			);
@@ -323,9 +323,9 @@
 				7952E0611804A25B0007FEB3 /* Util.m in Sources */,
 				7918B20A180C40DC00556C64 /* MapViewController.m in Sources */,
 				79444FFE18102ED1006BE317 /* TweetModel.xcdatamodeld in Sources */,
-				79445005181030A2006BE317 /* Tweet.m in Sources */,
-				79445008181030BF006BE317 /* Coordinates.m in Sources */,
 				7944500B181031D9006BE317 /* DataManager.m in Sources */,
+				790875DC181082650005B52B /* Coordinates.m in Sources */,
+				790875E0181082910005B52B /* Tweet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

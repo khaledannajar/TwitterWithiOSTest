@@ -14,6 +14,9 @@
 #import "AppDelegate.h"
 #import "Util.h"
 #import "MapViewController.h"
+#import "DataManager.h"
+#import "Tweet.h"
+#import "Coordinates.h"
 
 #define TWITTER_BASE_URL ([NSURL URLWithString:@"https://api.twitter.com/1.1/search/tweets.json"])
 #define SCR_WIDTH ([[UIScreen mainScreen] bounds].size.width)
@@ -30,6 +33,7 @@
     @property (nonatomic, retain) UIApplication *sharedApplication;
     @property (nonatomic, retain) NSString* searchToken;
     @property (nonatomic, retain) NSMutableArray* statuses;
+@property (nonatomic, retain) DataManager* dataManager;
 
 @end
 
@@ -52,7 +56,7 @@
     UINib* nib = [UINib nibWithNibName:@"TweetCell" bundle:nil];
     [self.collectionView registerNib:nib forCellWithReuseIdentifier:@"Cell"];
     
-    
+    self.dataManager = appDelegate.dataManager;
 }
 
 - (void)didReceiveMemoryWarning
@@ -106,8 +110,7 @@
     NSString* createdAt = [Util formatDateString:[oneTweet objectForKey:@"created_at"]];
     NSString* tweetText = [oneTweet objectForKey:@"text"];
     NSString* profileImageUrl = [oneTweet objectForKey:@"profile_image_url"];
-    NSString* retweeted = [oneTweet objectForKey:@"retweeted"];
-
+    NSNumber* retweeted = [oneTweet objectForKey:@"retweeted"];
 
 
     NSArray* coordinates = [oneTweet objectForKey:@"coordinates"];
@@ -217,7 +220,32 @@
     if (indexPath) {
         NSLog(@"saveButton indexPath is %@", indexPath);
     [self.statuses objectAtIndex:indexPath.row];
-        //    TODO: save tweet to core data
+        
+        NSManagedObjectContext *context = [self.dataManager managedObjectContext];
+        Tweet* tweet = [NSEntityDescription insertNewObjectForEntityForName:@"Tweet" inManagedObjectContext:context];
+        
+        NSDictionary* oneTweet = [self.statuses objectAtIndex:indexPath.row];
+
+        NSDictionary* user = [oneTweet objectForKey:@"user"];
+        NSString* tweeteeName = [user objectForKey:@"name"];
+        
+        tweet.tweeteeName = tweeteeName;
+        tweet.createdAt = [Util getTwitterDateFromString:[oneTweet objectForKey:@"created_at"]];
+        tweet.tweetText = [oneTweet objectForKey:@"text"];
+        tweet.profileImageUrl = [oneTweet objectForKey:@"profile_image_url"];
+        NSNumber* retweeted = [oneTweet objectForKey:@"retweeted"];
+        tweet.retweeted = retweeted;
+
+        NSDictionary* coordinatesDict = [oneTweet objectForKey:@"coordinates"];
+        if (![[NSNull null] isEqual:coordinatesDict] ) {
+            NSArray* coordinatesArray = [coordinatesDict objectForKey:@"coordinates"];
+            tweet.coordinates = [NSEntityDescription insertNewObjectForEntityForName:@"Coordinates" inManagedObjectContext:context];
+            tweet.coordinates.tweet = tweet;
+            tweet.coordinates.latitude = [coordinatesArray objectAtIndex:0];
+            tweet.coordinates.longitude = [coordinatesArray objectAtIndex:1];
+        }
+
+        NSLog(@"tweet = %@ coordinates=%@ ",tweet, tweet.coordinates);
         
     }else{
         NSLog(@"saveButton indexPath is nil");

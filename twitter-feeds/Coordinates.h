@@ -13,8 +13,8 @@
 
 @interface Coordinates : NSManagedObject
 
-@property (nonatomic, retain) NSString * latitude;
-@property (nonatomic, retain) NSString * longitude;
+@property (nonatomic, retain) NSNumber * latitude;
+@property (nonatomic, retain) NSNumber * longitude;
 @property (nonatomic, retain) Tweet *tweet;
 
 @end
