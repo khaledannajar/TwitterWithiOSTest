@@ -21,15 +21,13 @@
 
 +(NSString*) formatDateString:(NSString*) input
 {
-    input = @"Tue Oct 08 21:08:30 +0000 2013";
-    
-    NSString* year  = [input substringWithRange: NSMakeRange( input.length -4, 4)];
-    NSString* month = [input substringWithRange: NSMakeRange( 4, 3)];
-    NSString* day   = [input substringWithRange: NSMakeRange( 8, 2)];
-    NSString* time  = [input substringWithRange: NSMakeRange(11, 8)];
-    
-    NSString* output = [NSString stringWithFormat:@"%@ %@ %@ - %@",day,month,year,time];
-    return output;
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"EEE MMM dd HH:mm:ss +SSSS yyyy"];
+
+    NSDate *date=[dateFormatter dateFromString:input];
+
+    [dateFormatter setDateFormat:@"dd-MMM-yyyy HH:MM "];
+    return[    dateFormatter stringFromDate:date];
 }
 
 @end
