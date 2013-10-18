@@ -101,6 +101,9 @@
         UILabel* tweeterDateTxtView = (UILabel*) [cell viewWithTag:6];
     UIButton* saveButton = (UIButton*) [cell viewWithTag:7];
     
+    UIButton* deleteButton = (UIButton*) [cell viewWithTag:8];
+    [deleteButton setHidden:YES];
+    
     NSDictionary* oneTweet = [self.statuses objectAtIndex:indexPath.row];
     NSDictionary* user = [oneTweet objectForKey:@"user"];
     
@@ -145,6 +148,7 @@
     [profileImageView setImage:[UIImage imageNamed:@"green_tea.jpg"]];
     [profileImageView setHidden:NO];
 //    End test code
+    
     [saveButton addTarget:self action:@selector(saveButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     

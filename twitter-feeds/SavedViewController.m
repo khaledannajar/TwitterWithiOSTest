@@ -65,7 +65,7 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *identifier = @"Cell";
-    
+
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
     
     UIImageView *retweetedImageView = (UIImageView *)[cell viewWithTag:1];
@@ -79,7 +79,11 @@
     UILabel* tweeterNameLabel = (UILabel*) [cell viewWithTag:4];
     UILabel* tweetedTxtView = (UILabel*) [cell viewWithTag:5];
     UILabel* tweeterDateTxtView = (UILabel*) [cell viewWithTag:6];
-    UIButton* deleteButton = (UIButton*) [cell viewWithTag:7];
+    UIButton* deleteButton = (UIButton*) [cell viewWithTag:8];
+    
+    UIButton* saveButton = (UIButton*) [cell viewWithTag:7];
+    [saveButton setHidden:YES];
+
     
     Tweet* oneTweet = [self.tweets objectAtIndex:indexPath.row];
     
@@ -110,8 +114,6 @@
     [profileImageView setHidden:NO];
     //    End test code
     
-    deleteButton.titleLabel.text = @"Delete";
-    deleteButton.tintColor = [UIColor redColor];
     [deleteButton addTarget:self action:@selector(deleteButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     
