@@ -212,8 +212,8 @@
 -(void) saveButtonClicked:(UIButton *)button
 {
 
-    CGPoint location = [button.superview convertPoint:button.center toView:self.collectionView];
-    NSIndexPath *indexPath = [self.collectionView indexPathForItemAtPoint:location];
+    CGPoint tapLocation = [button.superview convertPoint:button.center toView:self.collectionView];
+    NSIndexPath *indexPath = [self.collectionView indexPathForItemAtPoint:tapLocation];
 
     if (indexPath) {
         NSLog(@"saveButton indexPath is %@", indexPath);
@@ -233,7 +233,7 @@
         tweet.profileImageUrl = [oneTweet objectForKey:@"profile_image_url"];
         NSNumber* retweeted = [oneTweet objectForKey:@"retweeted"];
         tweet.retweeted = retweeted;
-
+        tweet.height = [NSNumber numberWithFloat:[[oneTweet objectForKey:HEIGHT_DICTIONARY_KEY] floatValue]];
         NSDictionary* coordinatesDict = [oneTweet objectForKey:@"coordinates"];
         if (![[NSNull null] isEqual:coordinatesDict] ) {
             NSArray* coordinatesArray = [coordinatesDict objectForKey:@"coordinates"];

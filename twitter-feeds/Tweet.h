@@ -2,7 +2,7 @@
 //  Tweet.h
 //  twitter-feeds
 //
-//  Created by KhaledAnnajar on 10/17/13.
+//  Created by KhaledAnnajar on 10/18/13.
 //  Copyright (c) 2013 ALWANS. All rights reserved.
 //
 
@@ -18,6 +18,7 @@
 @property (nonatomic, retain) NSNumber * retweeted;
 @property (nonatomic, retain) NSString * tweeteeName;
 @property (nonatomic, retain) NSString * tweetText;
+@property (nonatomic, retain) NSNumber * height;
 @property (nonatomic, retain) Coordinates *coordinates;
 
 @end

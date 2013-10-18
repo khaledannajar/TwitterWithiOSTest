@@ -2,7 +2,7 @@
 //  Tweet.m
 //  twitter-feeds
 //
-//  Created by KhaledAnnajar on 10/17/13.
+//  Created by KhaledAnnajar on 10/18/13.
 //  Copyright (c) 2013 ALWANS. All rights reserved.
 //
 
@@ -17,6 +17,7 @@
 @dynamic retweeted;
 @dynamic tweeteeName;
 @dynamic tweetText;
+@dynamic height;
 @dynamic coordinates;
 
 @end
