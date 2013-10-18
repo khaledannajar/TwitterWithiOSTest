@@ -19,9 +19,7 @@
 #import "Coordinates.h"
 
 #define TWITTER_BASE_URL ([NSURL URLWithString:@"https://api.twitter.com/1.1/search/tweets.json"])
-#define SCR_WIDTH ([[UIScreen mainScreen] bounds].size.width)
-#define SCR_HEIGHT ([[UIScreen mainScreen] bounds].size.height)
-#define IS_IPAD ([[UIDevice currentDevice].model rangeOfString:@"iPad"].location != NSNotFound)
+
 #define HEIGHT_DICTIONARY_KEY (@"height")
 @interface FirstViewController ()
 {
