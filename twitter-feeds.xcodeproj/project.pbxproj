@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		790875DC181082650005B52B /* Coordinates.m in Sources */ = {isa = PBXBuildFile; fileRef = 790875DB181082650005B52B /* Coordinates.m */; };
-		790875E0181082910005B52B /* Tweet.m in Sources */ = {isa = PBXBuildFile; fileRef = 790875DF181082910005B52B /* Tweet.m */; };
 		7918B20A180C40DC00556C64 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7918B208180C40DC00556C64 /* MapViewController.m */; };
 		7918B20B180C40DC00556C64 /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7918B209180C40DC00556C64 /* MapViewController.xib */; };
 		7918B20E180C421F00556C64 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7918B20D180C421F00556C64 /* MapKit.framework */; };
@@ -23,6 +22,8 @@
 		796662271801E6DC00094679 /* TweetRetrun.m in Sources */ = {isa = PBXBuildFile; fileRef = 796662261801E6DC00094679 /* TweetRetrun.m */; };
 		7971712817FF126E00023B31 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7971712717FF126E00023B31 /* Social.framework */; };
 		798405BE1809E72500E8FBAA /* green_tea.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 798405BD1809E72500E8FBAA /* green_tea.jpg */; };
+		7984459318111D460042A4FA /* SavedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7984459218111D460042A4FA /* SavedViewController.m */; };
+		798445961811215B0042A4FA /* Tweet.m in Sources */ = {isa = PBXBuildFile; fileRef = 798445951811215B0042A4FA /* Tweet.m */; };
 		79E74F1A17FCA58400A91779 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79E74F1917FCA58400A91779 /* UIKit.framework */; };
 		79E74F1C17FCA58400A91779 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79E74F1B17FCA58400A91779 /* Foundation.framework */; };
 		79E74F1E17FCA58400A91779 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79E74F1D17FCA58400A91779 /* CoreGraphics.framework */; };
@@ -36,7 +37,6 @@
 		79E74F3617FCA58400A91779 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79E74F3517FCA58400A91779 /* FirstViewController.m */; };
 		79E74F3817FCA58400A91779 /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = 79E74F3717FCA58400A91779 /* first.png */; };
 		79E74F3A17FCA58400A91779 /* first@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79E74F3917FCA58400A91779 /* first@2x.png */; };
-		79E74F3D17FCA58400A91779 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79E74F3C17FCA58400A91779 /* SecondViewController.m */; };
 		79E74F3F17FCA58400A91779 /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = 79E74F3E17FCA58400A91779 /* second.png */; };
 		79E74F4117FCA58400A91779 /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79E74F4017FCA58400A91779 /* second@2x.png */; };
 		79E74F4C17FCA5FB00A91779 /* TweetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79E74F4B17FCA5FB00A91779 /* TweetCell.xib */; };
@@ -47,8 +47,6 @@
 /* Begin PBXFileReference section */
 		790875DA181082650005B52B /* Coordinates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Coordinates.h; sourceTree = "<group>"; };
 		790875DB181082650005B52B /* Coordinates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Coordinates.m; sourceTree = "<group>"; };
-		790875DE181082910005B52B /* Tweet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tweet.h; sourceTree = "<group>"; };
-		790875DF181082910005B52B /* Tweet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tweet.m; sourceTree = "<group>"; };
 		7918B207180C40DC00556C64 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		7918B208180C40DC00556C64 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		7918B209180C40DC00556C64 /* MapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
@@ -67,6 +65,10 @@
 		796662261801E6DC00094679 /* TweetRetrun.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetRetrun.m; sourceTree = "<group>"; };
 		7971712717FF126E00023B31 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		798405BD1809E72500E8FBAA /* green_tea.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = green_tea.jpg; sourceTree = "<group>"; };
+		7984459118111D460042A4FA /* SavedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SavedViewController.h; sourceTree = "<group>"; };
+		7984459218111D460042A4FA /* SavedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SavedViewController.m; sourceTree = "<group>"; };
+		798445941811215B0042A4FA /* Tweet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tweet.h; sourceTree = "<group>"; };
+		798445951811215B0042A4FA /* Tweet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tweet.m; sourceTree = "<group>"; };
 		79E74F1517FCA58400A91779 /* twitter-feeds.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "twitter-feeds.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		79E74F1917FCA58400A91779 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		79E74F1B17FCA58400A91779 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -85,8 +87,6 @@
 		79E74F3517FCA58400A91779 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
 		79E74F3717FCA58400A91779 /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
 		79E74F3917FCA58400A91779 /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
-		79E74F3B17FCA58400A91779 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
-		79E74F3C17FCA58400A91779 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
 		79E74F3E17FCA58400A91779 /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
 		79E74F4017FCA58400A91779 /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
 		79E74F4B17FCA5FB00A91779 /* TweetCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TweetCell.xib; sourceTree = "<group>"; };
@@ -170,8 +170,8 @@
 				79E74F4E17FCA63300A91779 /* views */,
 				79E74F3417FCA58400A91779 /* FirstViewController.h */,
 				79E74F3517FCA58400A91779 /* FirstViewController.m */,
-				79E74F3B17FCA58400A91779 /* SecondViewController.h */,
-				79E74F3C17FCA58400A91779 /* SecondViewController.m */,
+				7984459118111D460042A4FA /* SavedViewController.h */,
+				7984459218111D460042A4FA /* SavedViewController.m */,
 				7918B207180C40DC00556C64 /* MapViewController.h */,
 				7918B208180C40DC00556C64 /* MapViewController.m */,
 				7918B209180C40DC00556C64 /* MapViewController.xib */,
@@ -228,12 +228,12 @@
 				796662251801E6DC00094679 /* TweetRetrun.h */,
 				796662261801E6DC00094679 /* TweetRetrun.m */,
 				79444FFC18102ED1006BE317 /* TweetModel.xcdatamodeld */,
-				790875DE181082910005B52B /* Tweet.h */,
-				790875DF181082910005B52B /* Tweet.m */,
 				790875DA181082650005B52B /* Coordinates.h */,
 				790875DB181082650005B52B /* Coordinates.m */,
 				79445009181031D8006BE317 /* DataManager.h */,
 				7944500A181031D9006BE317 /* DataManager.m */,
+				798445941811215B0042A4FA /* Tweet.h */,
+				798445951811215B0042A4FA /* Tweet.m */,
 			);
 			name = dto;
 			sourceTree = "<group>";
@@ -318,14 +318,14 @@
 				79E74F2617FCA58400A91779 /* main.m in Sources */,
 				79E74F2A17FCA58400A91779 /* AppDelegate.m in Sources */,
 				79E74F3617FCA58400A91779 /* FirstViewController.m in Sources */,
-				79E74F3D17FCA58400A91779 /* SecondViewController.m in Sources */,
 				796662271801E6DC00094679 /* TweetRetrun.m in Sources */,
 				7952E0611804A25B0007FEB3 /* Util.m in Sources */,
 				7918B20A180C40DC00556C64 /* MapViewController.m in Sources */,
 				79444FFE18102ED1006BE317 /* TweetModel.xcdatamodeld in Sources */,
 				7944500B181031D9006BE317 /* DataManager.m in Sources */,
 				790875DC181082650005B52B /* Coordinates.m in Sources */,
-				790875E0181082910005B52B /* Tweet.m in Sources */,
+				7984459318111D460042A4FA /* SavedViewController.m in Sources */,
+				798445961811215B0042A4FA /* Tweet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
