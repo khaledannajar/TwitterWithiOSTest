@@ -18,7 +18,9 @@
 {
     AppDelegate *appDelegate;
 }
+
 @property (nonatomic, retain) DataManager* dataManager;
+@property (nonatomic, strong) NSArray *tweets;
 @end
 
 @implementation SavedViewController
@@ -29,9 +31,7 @@
     appDelegate = [[UIApplication sharedApplication] delegate];
     self.dataManager = appDelegate.dataManager;
     
-    
-    
-    // TODO: Load saved tweets from core data
+    [self fetchSavedTweets];
     
     UINib* nib = [UINib nibWithNibName:@"TweetCell" bundle:nil];
     [self.collectionView registerNib:nib forCellWithReuseIdentifier:@"Cell"];
@@ -39,12 +39,14 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+    self.tweets = nil;
 }
+
+# pragma - mark Collection view methods
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-//    TODO: number of cells
-    return 1;
+    return [self.tweets count];
 }
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -54,9 +56,9 @@
         width = 320;
     }
     
-//    NSDictionary* oneTweet = [self.statuses objectAtIndex:indexPath.row];
+    Tweet* oneTweet = [self.tweets objectAtIndex:indexPath.row];
     
-    float height = 180;
+    float height = [oneTweet.height floatValue];
     
     return CGSizeMake(width, height);
 }
@@ -79,35 +81,35 @@
     UILabel* tweeterDateTxtView = (UILabel*) [cell viewWithTag:6];
     UIButton* deleteButton = (UIButton*) [cell viewWithTag:7];
     
+    Tweet* oneTweet = [self.tweets objectAtIndex:indexPath.row];
     
+    tweeterNameLabel.text = oneTweet.tweeteeName;
+    tweetedTxtView.text = oneTweet.tweetText;
+    tweeterDateTxtView.text = [Util formatDateStringFromDate:oneTweet.createdAt];
     
-    tweeterNameLabel.text = @"tweeteeName";
-    tweetedTxtView.text = @"tweetText";
-    tweeterDateTxtView.text = @"createdAt";
-    
-//    if ([retweeted boolValue]) {
+    if (oneTweet.retweeted) {
         [retweetedImageView setHidden:NO];
-//    }else
-//    {
-//        [retweetedImageView setHidden:YES];
-//    }
+    }else
+    {
+        [retweetedImageView setHidden:YES];
+    }
     
-//    if ([Util isEmpty:coordinates] || [[NSNull null] isEqual:coordinates]) {
-//        [placesImageView setHidden:YES];
-//    }else{
+    if ([[NSNull null] isEqual:oneTweet.coordinates]) {
+        [placesImageView setHidden:YES];
+    }else{
         [placesImageView setHidden:NO];
         
         placesImageView.userInteractionEnabled = YES;
         UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]
                                                         initWithTarget:self action:@selector(handleTap:)];
-        
         tapGestureRecognizer.delegate = self;
         [placesImageView addGestureRecognizer:tapGestureRecognizer];
-//    }
+    }
     //    TODO test code to be removed
     [profileImageView setImage:[UIImage imageNamed:@"green_tea.jpg"]];
     [profileImageView setHidden:NO];
     //    End test code
+    
     deleteButton.titleLabel.text = @"Delete";
     deleteButton.tintColor = [UIColor redColor];
     [deleteButton addTarget:self action:@selector(deleteButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -123,25 +125,33 @@
     CGPoint tapLocation = [button.superview convertPoint:button.center toView:self.collectionView];
     NSIndexPath *indexPath = [self.collectionView indexPathForItemAtPoint:tapLocation];
 
-// TODO: get tweet from result arrray and delete
+    Tweet* oneTweet = [self.tweets objectAtIndex:indexPath.row];
+    [[self.dataManager managedObjectContext] deleteObject:oneTweet];
 }
 
 - (void)handleTap:(UITapGestureRecognizer *)tapGestureRecognizer
 {
     CGPoint tapLocation = [tapGestureRecognizer locationInView:self.collectionView];
     NSIndexPath *indexPath = [self.collectionView indexPathForItemAtPoint:tapLocation];
-    
-// TODO: tweet user name, coordinates
-    NSString* tweeteeName = @"name";
+
+    Tweet* oneTweet = [self.tweets objectAtIndex:indexPath.row];
     
     MapViewController* mapController = [[MapViewController alloc]initWithNibName:@"MapViewController" bundle:nil];
-    mapController.coordinates = @[@20, @20];
-    mapController.tweteeTitle = tweeteeName;
+    mapController.coordinates = @[oneTweet.coordinates.latitude, oneTweet.coordinates.longitude];
+    mapController.tweteeTitle = oneTweet.tweeteeName;
     
     UINavigationController* nav = [[UINavigationController alloc]initWithRootViewController:mapController];
     [self presentViewController:nav animated:YES completion:nil];
 }
 
 # pragma - mark fetch core data for tweets
-
+-(void) fetchSavedTweets
+{
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"Tweet" inManagedObjectContext:self.dataManager.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    NSError *error;
+    self.tweets = [self.dataManager.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+}
 @end

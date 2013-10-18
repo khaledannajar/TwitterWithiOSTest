@@ -14,5 +14,5 @@
 
 +(NSString*) formatDateString:(NSString*) input;
 +(NSDate*) getTwitterDateFromString:(NSString*) input;
-
++(NSString*) formatDateStringFromDate:(NSDate*) date;
 @end

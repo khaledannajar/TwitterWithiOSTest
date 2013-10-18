@@ -22,10 +22,7 @@
 +(NSString*) formatDateString:(NSString*) input
 {
     NSDate *date= [Util getTwitterDateFromString:input];
-    
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"dd-MMM-yyyy HH:MM "];
-    return[    dateFormatter stringFromDate:date];
+    return [Util formatDateStringFromDate:date];
 }
 
 +(NSDate*) getTwitterDateFromString:(NSString*) input
@@ -35,6 +32,14 @@
     
     NSDate *date=[dateFormatter dateFromString:input];
     return date;
+}
+
+
++(NSString*) formatDateStringFromDate:(NSDate*) date
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"dd-MMM-yyyy HH:MM "];
+    return [dateFormatter stringFromDate:date];
 }
 
 @end
