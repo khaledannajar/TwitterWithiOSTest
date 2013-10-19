@@ -243,10 +243,10 @@
             NSArray* coordinatesArray = [coordinatesDict objectForKey:@"coordinates"];
             tweet.coordinates = [NSEntityDescription insertNewObjectForEntityForName:@"Coordinates" inManagedObjectContext:context];
             tweet.coordinates.tweet = tweet;
-            tweet.coordinates.latitude = [coordinatesArray objectAtIndex:0];
-            tweet.coordinates.longitude = [coordinatesArray objectAtIndex:1];
+            tweet.coordinates.longitude = [coordinatesArray objectAtIndex:0];
+            tweet.coordinates.latitude = [coordinatesArray objectAtIndex:1];
         }
-
+        [appDelegate.dataManager saveContext];
         NSLog(@"tweet = %@ coordinates=%@ ",tweet, tweet.coordinates);
         
     }else{
