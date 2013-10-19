@@ -110,7 +110,8 @@
     NSString* tweeteeName = [user objectForKey:@"name"];
     NSString* createdAt = [Util formatDateString:[oneTweet objectForKey:@"created_at"]];
     NSString* tweetText = [oneTweet objectForKey:@"text"];
-    NSString* profileImageUrl = [oneTweet objectForKey:@"profile_image_url"];
+    NSString* profileImageUrl = [user objectForKey:@"profile_image_url"];
+    NSString* profileImageUrlHttps = [user objectForKey:@"profile_image_url_https"];
     NSNumber* retweeted = [oneTweet objectForKey:@"retweeted"];
 
 
@@ -144,8 +145,38 @@
         tapGestureRecognizer.delegate = self;
         [placesImageView addGestureRecognizer:tapGestureRecognizer];
     }
+    
 //    TODO test code to be removed
-    [profileImageView setImage:[UIImage imageNamed:@"green_tea.jpg"]];
+    NSLog(@"profileImageUrl=%@ /n profileImageUrlHttps=%@",profileImageUrl, profileImageUrlHttps);
+    BOOL httpImage = ![[NSNull null] isEqual:profileImageUrl] && ! [Util isEmpty:profileImageUrl];
+    BOOL httpsImage = ![[NSNull null] isEqual:profileImageUrlHttps] && ! [Util isEmpty:profileImageUrlHttps];
+    if (httpImage || httpsImage) {
+        
+        NSString* tmpImageUrl = httpImage?profileImageUrl:profileImageUrlHttps;
+        
+        NSData* imageData = [appDelegate.imagesDictionary objectForKey:tmpImageUrl];
+        if (imageData) {
+            
+            profileImageView.image = [UIImage imageWithData:imageData];
+            
+        }else{
+            
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                NSURL *imageURL = [NSURL URLWithString:tmpImageUrl];
+                __block NSData *imageData;
+                dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
+                              ^{
+                                  imageData = [NSData dataWithContentsOfURL:imageURL];
+                                  
+                                  // 7
+                                  [appDelegate.imagesDictionary setObject:imageData forKey:tmpImageUrl];
+                                  [self.collectionView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
+                              });
+            });
+        }
+    }
+    
+//    [profileImageView setImage:[UIImage imageNamed:@"green_tea.jpg"]];
     [profileImageView setHidden:NO];
 //    End test code
     

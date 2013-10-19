@@ -19,6 +19,7 @@
 @property (nonatomic, retain) NSObject* target;
 @property (nonatomic) SEL selector;
 @property (nonatomic, retain) DataManager* dataManager;
+@property (nonatomic, retain) NSMutableDictionary* imagesDictionary;
 
 - (void)getTwitterAccount;
 
