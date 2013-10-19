@@ -146,8 +146,7 @@
         [placesImageView addGestureRecognizer:tapGestureRecognizer];
     }
     
-//    TODO test code to be removed
-    NSLog(@"profileImageUrl=%@ /n profileImageUrlHttps=%@",profileImageUrl, profileImageUrlHttps);
+//    TODO: download images in updateFeed method to fix images override each other
     BOOL httpImage = ![[NSNull null] isEqual:profileImageUrl] && ! [Util isEmpty:profileImageUrl];
     BOOL httpsImage = ![[NSNull null] isEqual:profileImageUrlHttps] && ! [Util isEmpty:profileImageUrlHttps];
     if (httpImage || httpsImage) {
@@ -168,17 +167,13 @@
                               ^{
                                   imageData = [NSData dataWithContentsOfURL:imageURL];
                                   
-                                  // 7
                                   [appDelegate.imagesDictionary setObject:imageData forKey:tmpImageUrl];
                                   [self.collectionView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
                               });
             });
         }
     }
-    
-//    [profileImageView setImage:[UIImage imageNamed:@"green_tea.jpg"]];
     [profileImageView setHidden:NO];
-//    End test code
     
     [saveButton addTarget:self action:@selector(saveButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
