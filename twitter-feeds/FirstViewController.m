@@ -26,6 +26,7 @@
     NSArray *recipeImages;
     AppDelegate *appDelegate;
 
+
 }
     @property (strong, nonatomic) NSDictionary *tweetsDic;
     @property (nonatomic, retain) UIApplication *sharedApplication;
@@ -188,24 +189,10 @@
 {
     return YES;
 }
-- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar;
-// called when text starts editing
-{
-
-}
 - (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar;
 // return NO to not resign first responder
 {
     return YES;
-}
-- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
-// called when text ends editing
-{
-}
-- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
-// called when text changes (including clear)
-{
-
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar

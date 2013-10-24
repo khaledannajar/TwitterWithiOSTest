@@ -73,6 +73,10 @@
 								<int key="IBUITag">2</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+								<object class="NSCustomResource" key="IBUIImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">person-placeholder.jpg</string>
+								</object>
 							</object>
 							<object class="IBUIImageView" id="464455056">
 								<reference key="NSNextResponder" ref="801842890"/>
@@ -1196,6 +1200,7 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
+			<string key="person-placeholder.jpg">{56, 56}</string>
 			<string key="places_pin_icon.png">{333, 594}</string>
 			<string key="retweet.png">{16, 16}</string>
 			<string key="retweet_hover.png">{16, 16}</string>
