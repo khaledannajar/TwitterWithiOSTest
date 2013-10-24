@@ -19,7 +19,7 @@
 #import "Coordinates.h"
 
 #define TWITTER_BASE_URL ([NSURL URLWithString:@"https://api.twitter.com/1.1/search/tweets.json"])
-
+#define ALREADY_DOWNLOADING_STATE ([NSNull null])
 #define HEIGHT_DICTIONARY_KEY (@"height")
 @interface FirstViewController ()
 {
@@ -156,10 +156,13 @@
         
         NSData* imageData = [appDelegate.imagesDictionary objectForKey:tmpImageUrl];
         if (imageData) {
-            
-            profileImageView.image = [UIImage imageWithData:imageData];
+            if (![imageData isEqual:ALREADY_DOWNLOADING_STATE]) {
+                profileImageView.image = [UIImage imageWithData:imageData];
+            }
             
         }else{
+
+            [appDelegate.imagesDictionary setObject:ALREADY_DOWNLOADING_STATE forKey:tmpImageUrl];
             
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 NSURL *imageURL = [NSURL URLWithString:tmpImageUrl];
