@@ -129,6 +129,9 @@
 
     Tweet* oneTweet = [self.tweets objectAtIndex:indexPath.row];
     [[self.dataManager managedObjectContext] deleteObject:oneTweet];
+    [self.dataManager saveContext];
+//    [self.collectionView deleteItemsAtIndexPaths:@[indexPath]];
+    [self.collectionView reloadData];
 }
 
 - (void)handleTap:(UITapGestureRecognizer *)tapGestureRecognizer

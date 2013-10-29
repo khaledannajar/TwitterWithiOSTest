@@ -20,9 +20,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
-    NSLog(@"didFinishLaunchingWithOptions");
-    
     self.dataManager = [[DataManager alloc]init];
     self.imagesDictionary = [[NSMutableDictionary alloc]init];
     
