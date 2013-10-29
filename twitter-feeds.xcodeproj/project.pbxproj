@@ -41,6 +41,7 @@
 		79E74F3F17FCA58400A91779 /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = 79E74F3E17FCA58400A91779 /* second.png */; };
 		79E74F4117FCA58400A91779 /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79E74F4017FCA58400A91779 /* second@2x.png */; };
 		79E74F4C17FCA5FB00A91779 /* TweetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79E74F4B17FCA5FB00A91779 /* TweetCell.xib */; };
+		79F19AF7181F79FF00CA3818 /* ImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F19AF6181F79FF00CA3818 /* ImageDownloader.m */; };
 		79F1AABB17FEC4C9000969BD /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79F1AABA17FEC4C9000969BD /* MainStoryboard_iPad.storyboard */; };
 		79F95DBD17FFFFAE0001617D /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79F95DBC17FFFFAE0001617D /* Accounts.framework */; };
 /* End PBXBuildFile section */
@@ -92,6 +93,8 @@
 		79E74F3E17FCA58400A91779 /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
 		79E74F4017FCA58400A91779 /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
 		79E74F4B17FCA5FB00A91779 /* TweetCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TweetCell.xib; sourceTree = "<group>"; };
+		79F19AF5181F79FF00CA3818 /* ImageDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageDownloader.h; sourceTree = "<group>"; };
+		79F19AF6181F79FF00CA3818 /* ImageDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageDownloader.m; sourceTree = "<group>"; };
 		79F1AABA17FEC4C9000969BD /* MainStoryboard_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = MainStoryboard_iPad.storyboard; path = ../MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		79F95DBC17FFFFAE0001617D /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -127,6 +130,8 @@
 			children = (
 				7952E05F1804A25B0007FEB3 /* Util.h */,
 				7952E0601804A25B0007FEB3 /* Util.m */,
+				79F19AF5181F79FF00CA3818 /* ImageDownloader.h */,
+				79F19AF6181F79FF00CA3818 /* ImageDownloader.m */,
 			);
 			name = utils;
 			sourceTree = "<group>";
@@ -330,6 +335,7 @@
 				790875DC181082650005B52B /* Coordinates.m in Sources */,
 				7984459318111D460042A4FA /* SavedViewController.m in Sources */,
 				798445961811215B0042A4FA /* Tweet.m in Sources */,
+				79F19AF7181F79FF00CA3818 /* ImageDownloader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -17,10 +17,11 @@
 #import "DataManager.h"
 #import "Tweet.h"
 #import "Coordinates.h"
+#import "ImageDownloader.h"
 
 #define TWITTER_BASE_URL ([NSURL URLWithString:@"https://api.twitter.com/1.1/search/tweets.json"])
-#define ALREADY_DOWNLOADING_STATE ([NSNull null])
 #define HEIGHT_DICTIONARY_KEY (@"height")
+
 @interface FirstViewController ()
 {
     NSArray *recipeImages;
@@ -61,7 +62,7 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    //    TOTO: remove images from cache dictionary
+    [appDelegate.imagesDictionary removeAllObjects];
 }
 
 #pragma  - mark data source methods
@@ -98,8 +99,8 @@
 
 
     UILabel* tweeterNameLabel = (UILabel*) [cell viewWithTag:4];
-        UILabel* tweetedTxtView = (UILabel*) [cell viewWithTag:5];
-        UILabel* tweeterDateTxtView = (UILabel*) [cell viewWithTag:6];
+    UILabel* tweetedTxtView = (UILabel*) [cell viewWithTag:5];
+    UILabel* tweeterDateTxtView = (UILabel*) [cell viewWithTag:6];
     UIButton* saveButton = (UIButton*) [cell viewWithTag:7];
     
     UIButton* deleteButton = (UIButton*) [cell viewWithTag:8];
@@ -118,8 +119,7 @@
 
     NSArray* coordinates = [oneTweet objectForKey:@"coordinates"];
     
-    NSLog(@"name = %@ createdAt %@, tweetText %@, retweetCount %@, profileImage %@, coordinates %@", tweeteeName, createdAt, tweetText, retweeted,
-          profileImageUrl, coordinates);
+//    NSLog(@"name = %@ createdAt %@, tweetText %@, retweetCount %@, profileImage %@, coordinates %@", tweeteeName, createdAt, tweetText, retweeted, profileImageUrl, coordinates);
 
     
     
@@ -147,37 +147,7 @@
         [placesImageView addGestureRecognizer:tapGestureRecognizer];
     }
     
-//    TODO: download images in updateFeed method to fix images override each other
-    BOOL httpImage = ![[NSNull null] isEqual:profileImageUrl] && ! [Util isEmpty:profileImageUrl];
-    BOOL httpsImage = ![[NSNull null] isEqual:profileImageUrlHttps] && ! [Util isEmpty:profileImageUrlHttps];
-    if (httpImage || httpsImage) {
-        
-        NSString* tmpImageUrl = httpImage?profileImageUrl:profileImageUrlHttps;
-        
-        NSData* imageData = [appDelegate.imagesDictionary objectForKey:tmpImageUrl];
-        if (imageData) {
-            if (![imageData isEqual:ALREADY_DOWNLOADING_STATE]) {
-                profileImageView.image = [UIImage imageWithData:imageData];
-            }
-            
-        }else{
-
-            [appDelegate.imagesDictionary setObject:ALREADY_DOWNLOADING_STATE forKey:tmpImageUrl];
-            
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                NSURL *imageURL = [NSURL URLWithString:tmpImageUrl];
-                __block NSData *imageData;
-                dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
-                              ^{
-                                  imageData = [NSData dataWithContentsOfURL:imageURL];
-                                  
-                                  [appDelegate.imagesDictionary setObject:imageData forKey:tmpImageUrl];
-                                  [self.collectionView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
-                              });
-            });
-        }
-    }
-    [profileImageView setHidden:NO];
+    [ImageDownloader getProfileImageUrl:profileImageUrl httpsUrl:profileImageUrlHttps forImageView:profileImageView inCollectionView:self.collectionView withIndexPath:indexPath];
     
     [saveButton addTarget:self action:@selector(saveButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -250,7 +220,21 @@
         tweet.tweeteeName = tweeteeName;
         tweet.createdAt = [Util getTwitterDateFromString:[oneTweet objectForKey:@"created_at"]];
         tweet.tweetText = [oneTweet objectForKey:@"text"];
-        tweet.profileImageUrl = [oneTweet objectForKey:@"profile_image_url"];
+        
+        NSString* profileImageUrl = [user objectForKey:@"profile_image_url"];
+        NSString* profileImageUrlHttps = [user objectForKey:@"profile_image_url_https"];
+        BOOL httpImage = ![[NSNull null] isEqual:profileImageUrl] && ! [Util isEmpty:profileImageUrl];
+        BOOL httpsImage = ![[NSNull null] isEqual:profileImageUrlHttps] && ! [Util isEmpty:profileImageUrlHttps];
+        
+        if (httpImage) {
+            tweet.profileImageUrl = profileImageUrl;
+        }else if (httpsImage){
+            tweet.profileImageUrl = profileImageUrlHttps;
+        }else{
+            tweet.profileImageUrl = nil;
+        }
+
+        
         NSNumber* retweeted = [oneTweet objectForKey:@"retweeted"];
         tweet.retweeted = retweeted;
         tweet.height = [NSNumber numberWithFloat:[[oneTweet objectForKey:HEIGHT_DICTIONARY_KEY] floatValue]];

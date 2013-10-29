@@ -13,6 +13,7 @@
 #import "DataManager.h"
 #import "Tweet.h"
 #import "Coordinates.h"
+#import "ImageDownloader.h"
 
 @interface SavedViewController ()
 {
@@ -109,10 +110,9 @@
         tapGestureRecognizer.delegate = self;
         [placesImageView addGestureRecognizer:tapGestureRecognizer];
     }
-    //    TODO test code to be removed
-    [profileImageView setImage:[UIImage imageNamed:@"green_tea.jpg"]];
-    [profileImageView setHidden:NO];
-    //    End test code
+
+    profileImageView.image = [UIImage imageNamed:@"person-placeholder.jpg"];
+        [ImageDownloader getProfileImageUrl:oneTweet.profileImageUrl httpsUrl:nil forImageView:profileImageView inCollectionView:self.collectionView withIndexPath:indexPath];
     
     [deleteButton addTarget:self action:@selector(deleteButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
